@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/folder_list_item.xml" value="0.25364583333333335" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/note_edit.xml" value="0.25364583333333335" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/note_edit_list_item.xml" value="0.25364583333333335" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/note_list.xml" value="0.25" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/note_list_footer.xml" value="0.1125" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/menu/call_note_edit.xml" value="0.25364583333333335" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/menu/call_record_folder.xml" value="0.25364583333333335" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/menu/note_edit.xml" value="0.25364583333333335" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/menu/note_list.xml" value="0.21944444444444444" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/menu/note_list_dropdown.xml" value="0.25364583333333335" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/menu/note_list_options.xml" value="0.25364583333333335" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/menu/sub_folder.xml" value="0.25364583333333335" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

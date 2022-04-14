@@ -1,0 +1,155 @@
+@startuml
+
+title __MINOTE's Component Diagram__\n
+
+
+package net.micode.notes.model{
+class Note {
+    ==变量==
+    - ContentValues mNoteDiffValues;
+    - NoteData mNoteData;
+    - {static} final String TAG = "Note";
+    --方法--
+    + {static} synchronized long getNewNoteId(Context context, long folderId);
+    + Note();
+    + void setNoteValue(String key, String value);
+    + void setTextData(String key, String value) ;
+    + void setTextDataId(long id);
+    + long getTextDataId();
+    + void setCallDataId(long id);
+    + void setCallData(String key, String value);
+    + boolean isLocalModified();
+    + boolean syncNote(Context context, long noteId);
+    }
+class NoteData{
+        ==变量==
+        - long mTextDataId;
+        - ContentValues mTextDataValues;
+        - long mCallDataId;
+        - ContentValues mCallDataValues;
+        - {static} final String TAG = "NoteData";
+        + NoteData();
+        --方法--
+        boolean isLocalModified();
+        void setTextDataId(long id);
+        void setCallDataId(long id);
+        void setCallData(String key, String value);
+        void setTextData(String key, String value);
+        Uri pushIntoContentResolver(Context context, long noteId);
+        }
+
+Note +-- NoteData : 包含 >
+
+class WorkingNote
+{
+==变量==
+    - Note mNote; // Note for the working note
+    - long mNoteId;
+    - String mContent;// Note content
+    - int mMode;// Note mode
+    - long mAlertDate;
+    - long mModifiedDate;
+    - int mBgColorId;
+    - int mWidgetId;
+    - int mWidgetType;
+    - long mFolderId;
+    - Context mContext;
+    - {static} final String TAG = "WorkingNote";
+    - boolean mIsDeleted;
+    - NoteSettingChangedListener mNoteSettingStatusListener;
+    + {static} final String[] DATA_PROJECTION = new String[] {
+        DataColumns.ID,
+        DataColumns.CONTENT,
+        DataColumns.MIME_TYPE,
+        DataColumns.DATA1,
+        DataColumns.DATA2,
+        DataColumns.DATA3,
+        DataColumns.DATA4,
+    };
+    + {static} final String[] NOTE_PROJECTION = new String[]{
+        NoteColumns.PARENT_ID,
+        NoteColumns.ALERTED_DATE,
+        NoteColumns.BG_COLOR_ID,
+        NoteColumns.WIDGET_ID,
+        NoteColumns.WIDGET_TYPE,
+        NoteColumns.MODIFIED_DATE
+    };
+
+    - {static} final int DATA_ID_COLUMN = 0;
+    - {static} final int DATA_CONTENT_COLUMN = 1;
+    - {static} final int DATA_MIME_TYPE_COLUMN = 2;
+    - {static} final int DATA_MODE_COLUMN = 3;
+    - {static} final int NOTE_PARENT_ID_COLUMN = 0;
+    - {static} final int NOTE_ALERTED_DATE_COLUMN = 1;
+    - {static} final int NOTE_BG_COLOR_ID_COLUMN = 2;
+    - {static} final int NOTE_WIDGET_ID_COLUMN = 3;
+    - {static} final int NOTE_WIDGET_TYPE_COLUMN = 4;
+    - {static} final int NOTE_MODIFIED_DATE_COLUMN = 5;
+--方法--
+    - WorkingNote(Context context, long folderId);
+    - WorkingNote(Context context, long noteId, long folderId);
+    - void loadNote();
+    - void loadNoteData();
+    + {static} WorkingNote createEmptyNote(Context context, long folderId, int widgetId,
+            int widgetType, int defaultBgColorId);
+    + {static} WorkingNote load(Context context, long id);
+    + synchronized boolean saveNote();
+    + boolean existInDatabase();
+    - boolean isWorthSaving();
+    + void setOnSettingStatusChangedListener(NoteSettingChangedListener l);
+    + void setAlertDate(long date, boolean set);
+    + void markDeleted(boolean mark);
+    + void setBgColorId(int id);
+    + void setCheckListMode(int mode);
+    + void setWidgetType(int type);
+    + void setWidgetId(int id);
+    + void setWorkingText(String text);
+    + void convertToCallNote(String phoneNumber, long callDate);
+    + boolean hasClockAlert();
+    + String getContent();
+    + long getAlertDate();
+    + long getModifiedDate();
+    + int getBgColorResId();
+    + int getBgColorId();
+    + int getTitleBgResId();
+    + int getCheckListMode();
+    + long getNoteId();
+    + long getFolderId();
+    + int getWidgetId();
+    + int getWidgetType();
+}
+interface NoteSettingChangedListener{
+        void onBackgroundColorChanged();
+        void onClockAlertChanged(long date, boolean set);
+        void onWidgetChanged();
+        void onCheckListModeChanged(int oldMode, int newMode);
+    }
+'note left of WorkingNote::mNote
+'    Note for the working note
+'end note
+
+note right of NoteSettingChangedListener::onBackgroundColorChanged
+    Called when the background color of current note has just changed
+end note
+note right of NoteSettingChangedListener::onWidgetChanged
+    Call when user create note from widget
+end note
+note right of NoteSettingChangedListener::onClockAlertChanged
+    Called when user set clock
+end note
+note right of NoteSettingChangedListener::onCheckListModeChanged
+     Call when switch between check list mode and normal mode
+     @param oldMode is previous mode before change
+     @param newMode is new mode
+end note
+
+WorkingNote +-- NoteSettingChangedListener : 包含 >
+
+
+right footer
+Project MiNote2.0
+Made By PlantUML
+Teamwork with XieSiyuan JiangZengzhen LinYuxiang @ BUPT
+endfooter
+
+@enduml
