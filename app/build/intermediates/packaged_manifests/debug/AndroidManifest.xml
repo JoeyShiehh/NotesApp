@@ -41,13 +41,13 @@
         android:extractNativeLibs="false"
         android:icon="@drawable/icon_app"
         android:label="MiNotes"
-        android:supportsRtl="true"
-        android:testOnly="true" >
+        android:supportsRtl="true" >
         <activity
             android:name="net.micode.notes.ui.NotesListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="MiNotes"
             android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Holo.Light"
             android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

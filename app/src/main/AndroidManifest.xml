@@ -42,6 +42,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="MiNotes"
             android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Holo.Light"
             android:windowSoftInputMode="adjustPan">
 
             <intent-filter>
