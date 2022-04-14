@@ -48,7 +48,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="MiNotes"
             android:launchMode="singleTop"
-            android:uiOptions="none"
             android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
