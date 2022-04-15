@@ -48,20 +48,20 @@
             android:fadingEdge="@null" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:layout_width="fill_parent"-->
+<!--        android:layout_height="fill_parent"-->
+<!--        android:orientation="horizontal">-->
 
-        <Button
-            android:id="@+id/btn_new_note"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@drawable/new_note"
-            android:focusable="false" />
+<!--        <Button-->
+<!--            android:id="@+id/btn_new_note"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="bottom"-->
+<!--            android:background="@drawable/new_note"-->
+<!--            android:focusable="false" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 <!--        <Button-->
 <!--            android:id="@+id/btn_new_note"-->
