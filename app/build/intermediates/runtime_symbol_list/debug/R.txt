@@ -637,7 +637,6 @@ int id amPm 0x7f08001a
 int id beginning 0x7f08001b
 int id bin 0x7f08001c
 int id bottom 0x7f08001d
-int id btn_new_note 0x7f08001f
 int id btn_set_bg_color 0x7f080020
 int id buttonPanel 0x7f080021
 int id cancel_action 0x7f080022

@@ -638,7 +638,6 @@ id amPm
 id beginning
 id bin
 id bottom
-id btn_new_note
 id btn_set_bg_color
 id buttonPanel
 id cancel_action

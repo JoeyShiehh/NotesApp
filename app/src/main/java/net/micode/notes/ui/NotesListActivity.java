@@ -230,9 +230,9 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         mNotesListView.setOnItemLongClickListener(this);
         mNotesListAdapter = new NotesListAdapter(this);
         mNotesListView.setAdapter(mNotesListAdapter);
-        mAddNewNote = (Button) findViewById(R.id.btn_new_note);
-        mAddNewNote.setOnClickListener(this);
-        mAddNewNote.setOnTouchListener(new NewNoteOnTouchListener());
+//        mAddNewNote = (Button) findViewById(R.id.btn_new_note);
+//        mAddNewNote.setOnClickListener(this);
+//        mAddNewNote.setOnTouchListener(new NewNoteOnTouchListener());
         mDispatch = false;
         mDispatchY = 0;
         mOriginY = 0;
@@ -261,7 +261,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             mActionMode = mode;
             mNotesListAdapter.setChoiceMode(true);
             mNotesListView.setLongClickable(false);
-            mAddNewNote.setVisibility(View.GONE);
+//            mAddNewNote.setVisibility(View.GONE);
 
             View customView = LayoutInflater.from(NotesListActivity.this).inflate(
                     R.layout.note_list_dropdown_menu, null);
@@ -310,7 +310,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         public void onDestroyActionMode(ActionMode mode) {
             mNotesListAdapter.setChoiceMode(false);
             mNotesListView.setLongClickable(true);
-            mAddNewNote.setVisibility(View.VISIBLE);
+//            mAddNewNote.setVisibility(View.VISIBLE);
         }
 
         public void finishActionMode() {
@@ -357,67 +357,67 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         }
     }
 
-    private class NewNoteOnTouchListener implements OnTouchListener {
-
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN: {
-                    Display display = getWindowManager().getDefaultDisplay();
-                    int screenHeight = display.getHeight();
-                    int newNoteViewHeight = mAddNewNote.getHeight();
-                    int start = screenHeight - newNoteViewHeight;
-                    int eventY = start + (int) event.getY();
-                    /**
-                     * Minus TitleBar's height
-                     */
-                    if (mState == ListEditState.SUB_FOLDER) {
-                        eventY -= mTitleBar.getHeight();
-                        start -= mTitleBar.getHeight();
-                    }
-                        /**
-                        * HACKME:When click the transparent part of "New Note" button, dispatch
-                        * the event to the list view behind this button. The transparent part of
-                        * "New Note" button could be expressed by formula y=-0.12x+94（Unit:pixel）
-                        * and the line top of the button. The coordinate based on left of the "New
-                        * Note" button. The 94 represents maximum height of the transparent part.
-                        * Notice that, if the background of the button changes, the formula should
-                        * also change. This is very bad, just for the UI designer's strong requirement.
-                        */
-                    if (event.getY() < (event.getX() * (-0.12) + 94)) {
-                        View view = mNotesListView.getChildAt(mNotesListView.getChildCount() - 1
-                                - mNotesListView.getFooterViewsCount());
-                        if (view != null && view.getBottom() > start
-                                && (view.getTop() < (start + 94))) {
-                            mOriginY = (int) event.getY();
-                            mDispatchY = eventY;
-                            event.setLocation(event.getX(), mDispatchY);
-                            mDispatch = true;
-                            return mNotesListView.dispatchTouchEvent(event);
-                        }
-                    }
-                    break;
-                }
-                case MotionEvent.ACTION_MOVE: {
-                    if (mDispatch) {
-                        mDispatchY += (int) event.getY() - mOriginY;
-                        event.setLocation(event.getX(), mDispatchY);
-                        return mNotesListView.dispatchTouchEvent(event);
-                    }
-                    break;
-                }
-                default: {
-                    if (mDispatch) {
-                        event.setLocation(event.getX(), mDispatchY);
-                        mDispatch = false;
-                        return mNotesListView.dispatchTouchEvent(event);
-                    }
-                    break;
-                }
-            }
-            return false;
-        }
-
-    }
+//    private class NewNoteOnTouchListener implements OnTouchListener {
+//
+//        public boolean onTouch(View v, MotionEvent event) {
+//            switch (event.getAction()) {
+//                case MotionEvent.ACTION_DOWN: {
+//                    Display display = getWindowManager().getDefaultDisplay();
+//                    int screenHeight = display.getHeight();
+//                    int newNoteViewHeight = mAddNewNote.getHeight();
+//                    int start = screenHeight - newNoteViewHeight;
+//                    int eventY = start + (int) event.getY();
+//                    /**
+//                     * Minus TitleBar's height
+//                     */
+//                    if (mState == ListEditState.SUB_FOLDER) {
+//                        eventY -= mTitleBar.getHeight();
+//                        start -= mTitleBar.getHeight();
+//                    }
+//                        /**
+//                        * HACKME:When click the transparent part of "New Note" button, dispatch
+//                        * the event to the list view behind this button. The transparent part of
+//                        * "New Note" button could be expressed by formula y=-0.12x+94（Unit:pixel）
+//                        * and the line top of the button. The coordinate based on left of the "New
+//                        * Note" button. The 94 represents maximum height of the transparent part.
+//                        * Notice that, if the background of the button changes, the formula should
+//                        * also change. This is very bad, just for the UI designer's strong requirement.
+//                        */
+//                    if (event.getY() < (event.getX() * (-0.12) + 94)) {
+//                        View view = mNotesListView.getChildAt(mNotesListView.getChildCount() - 1
+//                                - mNotesListView.getFooterViewsCount());
+//                        if (view != null && view.getBottom() > start
+//                                && (view.getTop() < (start + 94))) {
+//                            mOriginY = (int) event.getY();
+//                            mDispatchY = eventY;
+//                            event.setLocation(event.getX(), mDispatchY);
+//                            mDispatch = true;
+//                            return mNotesListView.dispatchTouchEvent(event);
+//                        }
+//                    }
+//                    break;
+//                }
+//                case MotionEvent.ACTION_MOVE: {
+//                    if (mDispatch) {
+//                        mDispatchY += (int) event.getY() - mOriginY;
+//                        event.setLocation(event.getX(), mDispatchY);
+//                        return mNotesListView.dispatchTouchEvent(event);
+//                    }
+//                    break;
+//                }
+//                default: {
+//                    if (mDispatch) {
+//                        event.setLocation(event.getX(), mDispatchY);
+//                        mDispatch = false;
+//                        return mNotesListView.dispatchTouchEvent(event);
+//                    }
+//                    break;
+//                }
+//            }
+//            return false;
+//        }
+//
+//    }
 
     ;
 
@@ -558,7 +558,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         startAsyncNotesListQuery();
         if (data.getId() == Notes.ID_CALL_RECORD_FOLDER) {
             mState = ListEditState.CALL_RECORD_FOLDER;
-            mAddNewNote.setVisibility(View.GONE);
+//            mAddNewNote.setVisibility(View.GONE);
         } else {
             mState = ListEditState.SUB_FOLDER;
         }
@@ -572,9 +572,9 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_new_note:
-                createNewNote();
-                break;
+//            case R.id.btn_new_note:
+//                createNewNote();
+//                break;
             default:
                 break;
         }
@@ -690,7 +690,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             case CALL_RECORD_FOLDER:
                 mCurrentFolderId = Notes.ID_ROOT_FOLDER;
                 mState = ListEditState.NOTE_LIST;
-                mAddNewNote.setVisibility(View.VISIBLE);
+//                mAddNewNote.setVisibility(View.VISIBLE);
                 mTitleBar.setVisibility(View.GONE);
                 startAsyncNotesListQuery();
                 break;
