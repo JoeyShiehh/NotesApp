@@ -136,7 +136,6 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     private final static int REQUEST_CODE_NEW_NODE = 103;
 
     private long firstPressBackTime = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

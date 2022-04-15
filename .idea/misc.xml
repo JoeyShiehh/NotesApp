@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/dialog_edit_text.xml" value="0.1125" />
         <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/folder_list_item.xml" value="0.25364583333333335" />
         <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/note_edit.xml" value="0.25364583333333335" />
         <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/note_edit_list_item.xml" value="0.25364583333333335" />
-        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/note_list.xml" value="0.1" />
+        <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/note_list.xml" value="0.264" />
         <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/layout/note_list_footer.xml" value="0.1125" />
         <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/menu/call_note_edit.xml" value="0.25364583333333335" />
         <entry key="..\:/.code_project/Android_Studio/MiNote/app/src/main/res/menu/call_record_folder.xml" value="0.25364583333333335" />
