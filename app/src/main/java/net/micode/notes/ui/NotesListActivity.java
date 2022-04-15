@@ -806,6 +806,10 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_btn_create:{
+                createNewNote();
+                break;
+            }
             case R.id.menu_new_folder: {
                 showCreateOrModifyFolderDialog(true);
                 break;

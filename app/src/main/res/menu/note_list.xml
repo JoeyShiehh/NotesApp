@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/btn_create"
+        android:id="@+id/menu_btn_create"
         android:icon="@drawable/create_bt"
         android:title="Create"
         android:orderInCategory="0"

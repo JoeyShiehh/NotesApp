@@ -20,9 +20,9 @@
 20    android:versionName="1.0" >
 21
 22    <uses-sdk
-23        android:minSdkVersion="23"
+23        android:minSdkVersion="14"
 23-->E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml
-24        android:targetSdkVersion="23" />
+24        android:targetSdkVersion="29" />
 24-->E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml
 25
 26    <!-- <uses-sdk android:minSdkVersion="15" /> -->
@@ -60,13 +60,13 @@
 39        android:allowBackup="true"
 39-->[com.zaaach:toprightmenu:1.1.2] C:\Users\谢思远\.gradle\caches\transforms-3\f651816ea0940d24f66680264b20af60\transformed\toprightmenu-1.1.2\AndroidManifest.xml:12:9-35
 40        android:debuggable="true"
-41        android:extractNativeLibs="false"
-42        android:icon="@drawable/icon_app"
-42-->E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:37:9-42
-43        android:label="MiNotes"
-43-->E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:38:9-32
-44        android:supportsRtl="true" >
-44-->[com.zaaach:toprightmenu:1.1.2] C:\Users\谢思远\.gradle\caches\transforms-3\f651816ea0940d24f66680264b20af60\transformed\toprightmenu-1.1.2\AndroidManifest.xml:14:9-35
+41        android:icon="@drawable/icon_app"
+41-->E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:37:9-42
+42        android:label="MiNotes"
+42-->E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:38:9-32
+43        android:supportsRtl="true"
+43-->[com.zaaach:toprightmenu:1.1.2] C:\Users\谢思远\.gradle\caches\transforms-3\f651816ea0940d24f66680264b20af60\transformed\toprightmenu-1.1.2\AndroidManifest.xml:14:9-35
+44        android:testOnly="true" >
 45        <activity
 45-->E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:40:9-52:20
 46            android:name="net.micode.notes.ui.NotesListActivity"

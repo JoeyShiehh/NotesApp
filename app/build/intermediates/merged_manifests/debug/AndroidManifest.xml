@@ -20,8 +20,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="23"
-        android:targetSdkVersion="23" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="29" />
 
     <!-- <uses-sdk android:minSdkVersion="15" /> -->
 
@@ -38,10 +38,10 @@
     <application
         android:allowBackup="true"
         android:debuggable="true"
-        android:extractNativeLibs="false"
         android:icon="@drawable/icon_app"
         android:label="MiNotes"
-        android:supportsRtl="true" >
+        android:supportsRtl="true"
+        android:testOnly="true" >
         <activity
             android:name="net.micode.notes.ui.NotesListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

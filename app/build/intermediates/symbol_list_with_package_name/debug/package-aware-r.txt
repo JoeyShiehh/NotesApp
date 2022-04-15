@@ -647,7 +647,6 @@ id checkbox
 id chronometer
 id collapseActionView
 id contentPanel
-id create_new_note_icon
 id custom
 id customPanel
 id date
@@ -697,6 +696,7 @@ id ll_font_small
 id ll_font_super
 id media_actions
 id menu_alert
+id menu_btn_create
 id menu_delete
 id menu_delete_remind
 id menu_export_text
