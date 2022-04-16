@@ -20,7 +20,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_btn_create"
-        android:icon="@drawable/create_bt"
+        android:icon="@drawable/btn_create"
         android:title="Create"
         android:orderInCategory="0"
         android:showAsAction="always"

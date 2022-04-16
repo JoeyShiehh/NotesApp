@@ -21,10 +21,20 @@
     android:layout_height="fill_parent"
     android:background="@drawable/list_background">
 
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
+<!--        <TextView-->
+<!--            android:id="@+id/main_title"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="46dp"-->
+<!--            android:layout_gravity="top"-->
+<!--            android:background="@drawable/title_background"-->
+<!--            android:gravity="center"-->
+<!--            android:textSize="@dimen/text_font_size_large"-->
+<!--            android:text="@string/main_title" />-->
 
         <TextView
             android:id="@+id/tv_title_bar"
@@ -32,10 +42,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/title_bar_bg"
             android:visibility="gone"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:singleLine="true"
-            android:textColor="#FFEAD1AE"
-            android:textSize="@dimen/text_font_size_medium" />
+            android:textColor="#8F0410"
+            android:textSize="@dimen/text_font_size_large" />
 
         <ListView
             android:id="@+id/notes_list"
@@ -43,9 +53,9 @@
             android:layout_height="0dip"
             android:layout_weight="1"
             android:cacheColorHint="@null"
-            android:listSelector="@android:color/transparent"
             android:divider="@null"
-            android:fadingEdge="@null" />
+            android:fadingEdge="@null"
+            android:listSelector="@android:color/transparent" />
     </LinearLayout>
 
 <!--    <LinearLayout-->
@@ -63,13 +73,14 @@
 
 <!--    </LinearLayout>-->
 
-<!--        <Button-->
-<!--            android:id="@+id/btn_new_note"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="bottom"-->
-<!--            android:background="@drawable/new_note"-->
-<!--            android:focusable="false" />-->
+    <Button
+        android:id="@+id/btn_new_note"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="300dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/btn_create" />
 
 
 </FrameLayout>

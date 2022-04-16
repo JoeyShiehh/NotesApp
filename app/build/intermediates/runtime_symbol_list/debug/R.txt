@@ -525,6 +525,8 @@ int drawable abc_textfield_search_material 0x7f070051
 int drawable abc_vector_test 0x7f070052
 int drawable bg_btn_set_color 0x7f070053
 int drawable bg_color_btn_mask 0x7f070054
+int drawable btn_create 0x7f0700a7
+int drawable btn_create_small 0x7f0700a8
 int drawable call_record 0x7f070055
 int drawable clock 0x7f070056
 int drawable create_bt 0x7f070057
@@ -592,6 +594,7 @@ int drawable notify_panel_notification_icon_bg 0x7f070094
 int drawable search_result 0x7f070095
 int drawable selected 0x7f070096
 int drawable title_alert 0x7f070097
+int drawable title_background 0x7f0700a9
 int drawable title_bar_bg 0x7f070098
 int drawable trm_popup_bg 0x7f070099
 int drawable trm_popup_bottom_pressed 0x7f07009a
@@ -637,6 +640,7 @@ int id amPm 0x7f08001a
 int id beginning 0x7f08001b
 int id bin 0x7f08001c
 int id bottom 0x7f08001d
+int id btn_new_note 0x7f0800b6
 int id btn_set_bg_color 0x7f08001e
 int id buttonPanel 0x7f08001f
 int id cancel_action 0x7f080020
@@ -850,12 +854,12 @@ int layout select_dialog_item_material 0x7f0a0035
 int layout select_dialog_multichoice_material 0x7f0a0036
 int layout select_dialog_singlechoice_material 0x7f0a0037
 int layout settings_header 0x7f0a0038
-int layout sub_folder 0x7f0a003e
-int layout support_simple_spinner_dropdown_item 0x7f0a0039
-int layout trm_item_popup_menu_list 0x7f0a003a
-int layout trm_popup_menu 0x7f0a003b
-int layout widget_2x 0x7f0a003c
-int layout widget_4x 0x7f0a003d
+int layout sub_folder 0x7f0a0039
+int layout support_simple_spinner_dropdown_item 0x7f0a003a
+int layout trm_item_popup_menu_list 0x7f0a003b
+int layout trm_popup_menu 0x7f0a003c
+int layout widget_2x 0x7f0a003d
+int layout widget_4x 0x7f0a003e
 int menu call_note_edit 0x7f0b0000
 int menu call_record_folder 0x7f0b0001
 int menu note_edit 0x7f0b0002
@@ -927,6 +931,7 @@ int string format_folder_files_count 0x7f0e003a
 int string format_move_notes_to_folder 0x7f0e003b
 int string hint_foler_name 0x7f0e003c
 int string info_note_enter_desktop 0x7f0e003d
+int string main_title 0x7f0e0089
 int string menu_alert 0x7f0e003e
 int string menu_create_folder 0x7f0e003f
 int string menu_delete 0x7f0e0040

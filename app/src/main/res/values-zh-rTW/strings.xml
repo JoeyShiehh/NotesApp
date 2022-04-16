@@ -125,5 +125,6 @@
     </plurals>
     <string name="recycle_bin">回收站</string>
     <string name="press_back_twice">再按一次退出程序</string>
+    <string name="main_title">便籤</string>
 
 </resources>

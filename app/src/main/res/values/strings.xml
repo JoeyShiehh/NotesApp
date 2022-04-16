@@ -128,6 +128,7 @@
     <string name="datetime_dialog_cancel">cancel</string>
     <string name="recycle_bin">Recycle bin</string>
     <string name="press_back_twice">Please Press Back Twice To Exit</string>
+    <string name="main_title">Notes</string>
     <plurals name="search_results_title">
          <item quantity="one"><xliff:g id="number" example="1">%1$s</xliff:g> result for \"<xliff:g id="search" example="???">%2$s</xliff:g>\"</item>
         <!-- Case of 0 or 2 or more results. -->
