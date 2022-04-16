@@ -16,6 +16,9 @@
 
 package net.micode.notes.ui;
 
+import static net.micode.notes.R.*;
+
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -28,6 +31,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -139,7 +143,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_list);
+        setContentView(layout.note_list);
         initResources();
 
         /**
@@ -152,7 +156,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.note_list_options, menu);
         getMenuInflater().inflate(R.menu.note_list, menu);
-        Log.d(TAG, "onCreateOptionsMenu exe");
+        Log.d(TAG, "onCreateOptionsMenu");
         return true;
     }
 
@@ -172,7 +176,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             StringBuilder sb = new StringBuilder();
             InputStream in = null;
             try {
-                in = getResources().openRawResource(R.raw.introduction);
+                in = getResources().openRawResource(raw.introduction);
                 if (in != null) {
                     InputStreamReader isr = new InputStreamReader(in);
                     BufferedReader br = new BufferedReader(isr);
@@ -222,8 +226,8 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         mContentResolver = this.getContentResolver();
         mBackgroundQueryHandler = new BackgroundQueryHandler(this.getContentResolver());
         mCurrentFolderId = Notes.ID_ROOT_FOLDER;
-        mNotesListView = (ListView) findViewById(R.id.notes_list);
-        mNotesListView.addFooterView(LayoutInflater.from(this).inflate(R.layout.note_list_footer, null),
+        mNotesListView = (ListView) findViewById(id.notes_list);
+        mNotesListView.addFooterView(LayoutInflater.from(this).inflate(layout.note_list_footer, null),
                 null, false);
         mNotesListView.setOnItemClickListener(new OnListItemClickListener());
         mNotesListView.setOnItemLongClickListener(this);
@@ -235,7 +239,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         mDispatch = false;
         mDispatchY = 0;
         mOriginY = 0;
-        mTitleBar = (TextView) findViewById(R.id.tv_title_bar);
+        mTitleBar = (TextView) findViewById(id.tv_title_bar);
         mState = ListEditState.NOTE_LIST;
         mModeCallBack = new ModeCallback();
     }
@@ -248,8 +252,8 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             getMenuInflater().inflate(R.menu.note_list_options, menu);
             Log.d(TAG, "onCreateActionMode");
-            menu.findItem(R.id.delete).setOnMenuItemClickListener(this);
-            mMoveMenu = menu.findItem(R.id.move);
+            menu.findItem(id.delete).setOnMenuItemClickListener(this);
+            mMoveMenu = menu.findItem(id.move);
             if (mFocusNoteDataItem.getParentId() == Notes.ID_CALL_RECORD_FOLDER
                     || DataUtils.getUserFolderCount(mContentResolver) == 0) {
                 mMoveMenu.setVisible(true);
@@ -263,10 +267,10 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 //            mAddNewNote.setVisibility(View.GONE);
 
             View customView = LayoutInflater.from(NotesListActivity.this).inflate(
-                    R.layout.note_list_dropdown_menu, null);
+                    layout.note_list_dropdown_menu, null);
             mode.setCustomView(customView);
             mDropDownMenu = new DropdownMenu(NotesListActivity.this,
-                    (Button) customView.findViewById(R.id.selection_menu),
+                    (Button) customView.findViewById(id.selection_menu),
                     R.menu.note_list_dropdown);
             mDropDownMenu.setOnDropdownMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {
@@ -282,16 +286,16 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         private void updateMenu() {
             int selectedCount = mNotesListAdapter.getSelectedCount();
             // Update dropdown menu
-            String format = getResources().getString(R.string.menu_select_title, selectedCount);
+            String format = getResources().getString(string.menu_select_title, selectedCount);
             mDropDownMenu.setTitle(format);
-            MenuItem item = mDropDownMenu.findItem(R.id.action_select_all);
+            MenuItem item = mDropDownMenu.findItem(id.action_select_all);
             if (item != null) {
                 if (mNotesListAdapter.isAllSelected()) {
                     item.setChecked(true);
-                    item.setTitle(R.string.menu_deselect_all);
+                    item.setTitle(string.menu_deselect_all);
                 } else {
                     item.setChecked(false);
-                    item.setTitle(R.string.menu_select_all);
+                    item.setTitle(string.menu_select_all);
                 }
             }
         }
@@ -324,17 +328,17 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
         public boolean onMenuItemClick(MenuItem item) {
             if (mNotesListAdapter.getSelectedCount() == 0) {
-                Toast.makeText(NotesListActivity.this, getString(R.string.menu_select_none),
+                Toast.makeText(NotesListActivity.this, getString(string.menu_select_none),
                         Toast.LENGTH_SHORT).show();
                 return true;
             }
 
             switch (item.getItemId()) {
-                case R.id.delete:
+                case id.delete:
                     AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
-                    builder.setTitle(getString(R.string.alert_title_delete));
+                    builder.setTitle(getString(string.alert_title_delete));
                     builder.setIcon(android.R.drawable.ic_dialog_alert);
-                    builder.setMessage(getString(R.string.alert_message_delete_notes,
+                    builder.setMessage(getString(string.alert_message_delete_notes,
                             mNotesListAdapter.getSelectedCount()));
                     builder.setPositiveButton(android.R.string.ok,
                             new DialogInterface.OnClickListener() {
@@ -346,7 +350,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                     builder.setNegativeButton(android.R.string.cancel, null);
                     builder.show();
                     break;
-                case R.id.move:
+                case id.move:
                     startQueryDestinationFolders();
                     break;
                 default:
@@ -455,7 +459,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     private void showFolderListMenu(Cursor cursor) {
         AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
-        builder.setTitle(R.string.menu_title_select_folder);
+        builder.setTitle(string.menu_title_select_folder);
         final FoldersListAdapter adapter = new FoldersListAdapter(this, cursor);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 
@@ -464,7 +468,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                         mNotesListAdapter.getSelectedItemIds(), adapter.getItemId(which));
                 Toast.makeText(
                         NotesListActivity.this,
-                        getString(R.string.format_move_notes_to_folder,
+                        getString(string.format_move_notes_to_folder,
                                 mNotesListAdapter.getSelectedCount(),
                                 adapter.getFolderName(NotesListActivity.this, which)),
                         Toast.LENGTH_SHORT).show();
@@ -562,7 +566,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             mState = ListEditState.SUB_FOLDER;
         }
         if (data.getId() == Notes.ID_CALL_RECORD_FOLDER) {
-            mTitleBar.setText(R.string.call_record_folder_name);
+            mTitleBar.setText(string.call_record_folder_name);
         } else {
             mTitleBar.setText(data.getSnippet());
         }
@@ -593,20 +597,20 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     private void showCreateOrModifyFolderDialog(final boolean create) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit_text, null);
-        final EditText etName = (EditText) view.findViewById(R.id.et_foler_name);
+        View view = LayoutInflater.from(this).inflate(layout.dialog_edit_text, null);
+        final EditText etName = (EditText) view.findViewById(id.et_foler_name);
         showSoftInput();
         if (!create) {
             if (mFocusNoteDataItem != null) {
                 etName.setText(mFocusNoteDataItem.getSnippet());
-                builder.setTitle(getString(R.string.menu_folder_change_name));
+                builder.setTitle(getString(string.menu_folder_change_name));
             } else {
                 Log.e(TAG, "The long click data item is null");
                 return;
             }
         } else {
             etName.setText("");
-            builder.setTitle(this.getString(R.string.menu_create_folder));
+            builder.setTitle(this.getString(string.menu_create_folder));
         }
 
         builder.setPositiveButton(android.R.string.ok, null);
@@ -623,7 +627,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 hideSoftInput(etName);
                 String name = etName.getText().toString();
                 if (DataUtils.checkVisibleFolderName(mContentResolver, name)) {
-                    Toast.makeText(NotesListActivity.this, getString(R.string.folder_exist, name),
+                    Toast.makeText(NotesListActivity.this, getString(string.folder_exist, name),
                             Toast.LENGTH_LONG).show();
                     etName.setSelection(0, etName.length());
                     return;
@@ -685,6 +689,8 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 mState = ListEditState.NOTE_LIST;
                 startAsyncNotesListQuery();
                 mTitleBar.setVisibility(View.GONE);
+                ActionBar actionBar = getActionBar();
+                actionBar.show();
                 break;
             case CALL_RECORD_FOLDER:
                 mCurrentFolderId = Notes.ID_ROOT_FOLDER;
@@ -697,7 +703,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 //添加了双击返回键退出程序的功能
                 long secondPressBackTime = System.currentTimeMillis();
                 if (secondPressBackTime - firstPressBackTime > 2000) {
-                    Toast.makeText(NotesListActivity.this, R.string.press_back_twice, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NotesListActivity.this, string.press_back_twice, Toast.LENGTH_SHORT).show();
                     firstPressBackTime = secondPressBackTime;
                 } else {
                     super.onBackPressed();
@@ -731,9 +737,9 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
             if (mFocusNoteDataItem != null) {
                 menu.setHeaderTitle(mFocusNoteDataItem.getSnippet());
-                menu.add(0, MENU_FOLDER_VIEW, 0, R.string.menu_folder_view);
-                menu.add(0, MENU_FOLDER_DELETE, 0, R.string.menu_folder_delete);
-                menu.add(0, MENU_FOLDER_CHANGE_NAME, 0, R.string.menu_folder_change_name);
+                menu.add(0, MENU_FOLDER_VIEW, 0, string.menu_folder_view);
+                menu.add(0, MENU_FOLDER_DELETE, 0, string.menu_folder_delete);
+                menu.add(0, MENU_FOLDER_CHANGE_NAME, 0, string.menu_folder_change_name);
             }
         }
     };
@@ -758,9 +764,9 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 break;
             case MENU_FOLDER_DELETE:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(getString(R.string.alert_title_delete));
+                builder.setTitle(getString(string.alert_title_delete));
                 builder.setIcon(android.R.drawable.ic_dialog_alert);
-                builder.setMessage(getString(R.string.alert_message_delete_folder));
+                builder.setMessage(getString(string.alert_message_delete_folder));
                 builder.setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -787,10 +793,11 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         if (mState == ListEditState.NOTE_LIST) {
             getMenuInflater().inflate(R.menu.note_list, menu);
             // set sync or sync_cancel 同步或取消同步
-            menu.findItem(R.id.menu_sync).setTitle(
-                    GTaskSyncService.isSyncing() ? R.string.menu_sync_cancel : R.string.menu_sync);
+            menu.findItem(id.menu_sync).setTitle(
+                    GTaskSyncService.isSyncing() ? string.menu_sync_cancel : string.menu_sync);
         } else if (mState == ListEditState.SUB_FOLDER) {
-            getMenuInflater().inflate(R.menu.sub_folder, menu);
+//            getMenuInflater().inflate(R.menu.sub_folder, menu);
+            menu.findItem(id.note_list_moreaction).setVisible(false);
         } else if (mState == ListEditState.CALL_RECORD_FOLDER) {
             getMenuInflater().inflate(R.menu.call_record_folder, menu);
         } else if(mState == ListEditState.RECYCLE_BIN){
@@ -805,21 +812,21 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_btn_create:{
+            case id.menu_btn_create:{
                 createNewNote();
                 break;
             }
-            case R.id.menu_new_folder: {
+            case id.menu_new_folder: {
                 showCreateOrModifyFolderDialog(true);
                 break;
             }
-            case R.id.menu_export_text: {
+            case id.menu_export_text: {
                 exportNoteToText();
                 break;
             }
-            case R.id.menu_sync: {
+            case id.menu_sync: {
                 if (isSyncMode()) {
-                    if (TextUtils.equals(item.getTitle(), getString(R.string.menu_sync))) {
+                    if (TextUtils.equals(item.getTitle(), getString(string.menu_sync))) {
                         GTaskSyncService.startSync(this);
                     } else {
                         GTaskSyncService.cancelSync(this);
@@ -829,15 +836,15 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 }
                 break;
             }
-            case R.id.menu_setting: {
+            case id.menu_setting: {
                 startPreferenceActivity();
                 break;
             }
-            case R.id.menu_new_note: {
+            case id.menu_new_note: {
                 createNewNote();
                 break;
             }
-            case R.id.menu_search:
+            case id.menu_search:
                 onSearchRequested();
                 break;
             default:
@@ -866,26 +873,26 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 if (result == BackupUtils.STATE_SD_CARD_UNMOUONTED) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
                     builder.setTitle(NotesListActivity.this
-                            .getString(R.string.failed_sdcard_export));
+                            .getString(string.failed_sdcard_export));
                     builder.setMessage(NotesListActivity.this
-                            .getString(R.string.error_sdcard_unmounted));
+                            .getString(string.error_sdcard_unmounted));
                     builder.setPositiveButton(android.R.string.ok, null);
                     builder.show();
                 } else if (result == BackupUtils.STATE_SUCCESS) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
                     builder.setTitle(NotesListActivity.this
-                            .getString(R.string.success_sdcard_export));
+                            .getString(string.success_sdcard_export));
                     builder.setMessage(NotesListActivity.this.getString(
-                            R.string.format_exported_file_location, backup
+                            string.format_exported_file_location, backup
                                     .getExportedTextFileName(), backup.getExportedTextFileDir()));
                     builder.setPositiveButton(android.R.string.ok, null);
                     builder.show();
                 } else if (result == BackupUtils.STATE_SYSTEM_ERROR) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
                     builder.setTitle(NotesListActivity.this
-                            .getString(R.string.failed_sdcard_export));
+                            .getString(string.failed_sdcard_export));
                     builder.setMessage(NotesListActivity.this
-                            .getString(R.string.error_sdcard_export));
+                            .getString(string.error_sdcard_export));
                     builder.setPositiveButton(android.R.string.ok, null);
                     builder.show();
                 }
@@ -907,6 +914,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     private class OnListItemClickListener implements OnItemClickListener {
 
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.d(TAG,"onItemClick");
             if (view instanceof NotesListItem) {
                 NoteItemData item = ((NotesListItem) view).getItemData();
                 if (mNotesListAdapter.isInChoiceMode()) {
@@ -922,6 +930,8 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                     case NOTE_LIST:
                         if (item.getType() == Notes.TYPE_FOLDER
                                 || item.getType() == Notes.TYPE_SYSTEM) {
+                            ActionBar actionBar = getActionBar();
+                            actionBar.hide();
                             openFolder(item);
                         } else if (item.getType() == Notes.TYPE_NOTE) {
                             openNode(item);
@@ -932,10 +942,13 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                     case SUB_FOLDER:
                     case CALL_RECORD_FOLDER:
                         if (item.getType() == Notes.TYPE_NOTE) {
+//                            getMenuInflater().inflate(R.menu.sub_folder);
                             openNode(item);
                         } else {
                             Log.e(TAG, "Wrong note type in SUB_FOLDER");
                         }
+                        break;
+                    case RECYCLE_BIN:
                         break;
                     default:
                         break;
