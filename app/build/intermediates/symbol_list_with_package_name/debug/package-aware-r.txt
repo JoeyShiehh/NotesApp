@@ -526,6 +526,8 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable bg_btn_set_color
 drawable bg_color_btn_mask
+drawable btn_create
+drawable btn_create_small
 drawable call_record
 drawable clock
 drawable create_bt
@@ -593,6 +595,7 @@ drawable notify_panel_notification_icon_bg
 drawable search_result
 drawable selected
 drawable title_alert
+drawable title_background
 drawable title_bar_bg
 drawable trm_popup_bg
 drawable trm_popup_bottom_pressed
@@ -638,6 +641,7 @@ id amPm
 id beginning
 id bin
 id bottom
+id btn_new_note
 id btn_set_bg_color
 id buttonPanel
 id cancel_action
@@ -928,6 +932,7 @@ string format_folder_files_count
 string format_move_notes_to_folder
 string hint_foler_name
 string info_note_enter_desktop
+string main_title
 string menu_alert
 string menu_create_folder
 string menu_delete

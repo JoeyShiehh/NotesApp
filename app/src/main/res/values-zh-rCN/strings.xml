@@ -124,5 +124,6 @@
         <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 条符合“<xliff:g id="SEARCH">%2$s</xliff:g>”的搜索结果</item>
     </plurals>
     <string name="press_back_twice">再按一次退出程序</string>
+    <string name="main_title">便签</string>
 
 </resources>

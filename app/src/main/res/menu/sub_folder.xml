@@ -20,6 +20,7 @@
 
     <item
         android:id="@+id/menu_new_note"
+        android:icon="@drawable/btn_create"
         android:showAsAction="always"
         android:title="@string/notelist_menu_new"
         android:orderInCategory="1"
