@@ -17,11 +17,12 @@
 
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+    
     <item
         android:id="@+id/menu_new_note"
         android:showAsAction="always"
         android:title="@string/notelist_menu_new"
+        android:icon="@drawable/menu_icon"
         android:orderInCategory="1"
         tools:ignore="AppCompatResource" />
 </menu>
