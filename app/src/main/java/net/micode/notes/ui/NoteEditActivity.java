@@ -83,6 +83,8 @@ public class NoteEditActivity extends Activity implements OnClickListener,
         public TextView tvAlertDate;
 
         public ImageView ibSetBgColor;
+
+        public ImageView showMenu;
     }
 
     private static final Map<Integer, Integer> sBgSelectorBtnsMap = new HashMap<Integer, Integer>();
@@ -149,6 +151,7 @@ public class NoteEditActivity extends Activity implements OnClickListener,
 
     private String mUserQuery;
     private Pattern mPattern;
+    public NoteEditActivity mNoteEditActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -371,6 +374,8 @@ public class NoteEditActivity extends Activity implements OnClickListener,
         mNoteHeaderHolder.ivAlertIcon = (ImageView) findViewById(R.id.iv_alert_icon);
         mNoteHeaderHolder.tvAlertDate = (TextView) findViewById(R.id.tv_alert_date);
         mNoteHeaderHolder.ibSetBgColor = (ImageView) findViewById(R.id.btn_set_bg_color);
+        mNoteHeaderHolder.showMenu = (ImageView) findViewById(R.id.btn_edit_menu);
+        mNoteHeaderHolder.showMenu.setOnClickListener(this);
         mNoteHeaderHolder.ibSetBgColor.setOnClickListener(this);
         mNoteEditor = (EditText) findViewById(R.id.note_edit_view);
         mNoteEditorPanel = findViewById(R.id.sv_note_edit);
@@ -433,7 +438,7 @@ public class NoteEditActivity extends Activity implements OnClickListener,
             findViewById(sBgSelectorSelectionMap.get(mWorkingNote.getBgColorId())).setVisibility(
                     -View.VISIBLE);
         }else if(id == R.id.btn_edit_menu){
-            openOptionsMenu();
+            showPopupMenu(mNoteHeaderHolder.showMenu);
         }else if (sBgSelectorBtnsMap.containsKey(id)) {
             findViewById(sBgSelectorSelectionMap.get(mWorkingNote.getBgColorId())).setVisibility(
                     View.GONE);
@@ -453,6 +458,63 @@ public class NoteEditActivity extends Activity implements OnClickListener,
             }
             mFontSizeSelector.setVisibility(View.GONE);
         }
+    }
+    private void showPopupMenu(View view) {
+        // View当前PopupMenu显示的相对View的位置
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        // menu布局
+        popupMenu.getMenuInflater().inflate(R.menu.note_edit, popupMenu.getMenu());
+        // menu的item点击事件
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_new_note:
+                        createNewNote();
+                        break;
+                    case R.id.menu_delete:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mNoteEditActivity);
+                        builder.setTitle(getString(R.string.alert_title_delete));
+                        builder.setIcon(android.R.drawable.ic_dialog_alert);
+                        builder.setMessage(getString(R.string.alert_message_delete_note));
+                        builder.setPositiveButton(android.R.string.ok,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        deleteCurrentNote();
+                                        finish();
+                                    }
+                                });
+                        builder.setNegativeButton(android.R.string.cancel, null);
+                        builder.show();
+                        break;
+                    case R.id.menu_font_size:
+                        mFontSizeSelector.setVisibility(View.VISIBLE);
+                        findViewById(sFontSelectorSelectionMap.get(mFontSizeId)).setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.menu_list_mode:
+                        mWorkingNote.setCheckListMode(mWorkingNote.getCheckListMode() == 0 ?
+                                TextNote.MODE_CHECK_LIST : 0);
+                        break;
+                    case R.id.menu_share:
+                        getWorkingText();
+                        sendTo(mNoteEditActivity, mWorkingNote.getContent());
+                        break;
+                    case R.id.menu_send_to_desktop:
+                        sendToDesktop();
+                        break;
+                    case R.id.menu_alert:
+                        setReminder();
+                        break;
+                    case R.id.menu_delete_remind:
+                        mWorkingNote.setAlertDate(0, false);
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+        popupMenu.show();
     }
 
     @Override
