@@ -75,6 +75,8 @@ import java.util.regex.Pattern;
 
 public class NoteEditActivity extends Activity implements OnClickListener,
         NoteSettingChangedListener, OnTextViewChangeListener {
+
+    private NoteEditActivity mNoteEditActivity = this;
     private class HeadViewHolder {
         public TextView tvModified;
 
@@ -151,7 +153,6 @@ public class NoteEditActivity extends Activity implements OnClickListener,
 
     private String mUserQuery;
     private Pattern mPattern;
-    public NoteEditActivity mNoteEditActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -374,9 +375,9 @@ public class NoteEditActivity extends Activity implements OnClickListener,
         mNoteHeaderHolder.ivAlertIcon = (ImageView) findViewById(R.id.iv_alert_icon);
         mNoteHeaderHolder.tvAlertDate = (TextView) findViewById(R.id.tv_alert_date);
         mNoteHeaderHolder.ibSetBgColor = (ImageView) findViewById(R.id.btn_set_bg_color);
-        mNoteHeaderHolder.showMenu = (ImageView) findViewById(R.id.btn_edit_menu);
-        mNoteHeaderHolder.showMenu.setOnClickListener(this);
+        mNoteHeaderHolder.showMenu =(ImageView) findViewById(R.id.btn_edit_menu);
         mNoteHeaderHolder.ibSetBgColor.setOnClickListener(this);
+        mNoteHeaderHolder.showMenu.setOnClickListener(this);
         mNoteEditor = (EditText) findViewById(R.id.note_edit_view);
         mNoteEditorPanel = findViewById(R.id.sv_note_edit);
         mNoteBgColorSelector = findViewById(R.id.note_bg_color_selector);
