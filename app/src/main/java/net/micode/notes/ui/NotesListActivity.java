@@ -236,7 +236,6 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         mAddNewNote = (Button) findViewById(R.id.btn_new_note);
         mAddNewNote.setOnClickListener(this);
         mAddNewNote.setOnTouchListener(new NewNoteOnTouchListener());
-        mAddNewNote.setVisibility(View.GONE);
         mDispatch = false;
         mDispatchY = 0;
         mOriginY = 0;
@@ -693,7 +692,6 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 mTitleBar.setVisibility(View.GONE);
                 ActionBar actionBar = getActionBar();
                 actionBar.show();
-                mAddNewNote.setVisibility(View.GONE);
                 break;
             case CALL_RECORD_FOLDER:
                 mCurrentFolderId = Notes.ID_ROOT_FOLDER;
@@ -814,10 +812,6 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case id.menu_btn_create:{
-                createNewNote();
-                break;
-            }
             case id.menu_new_folder: {
                 showCreateOrModifyFolderDialog(true);
                 break;

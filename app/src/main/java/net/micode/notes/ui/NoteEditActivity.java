@@ -49,6 +49,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -430,8 +431,10 @@ public class NoteEditActivity extends Activity implements OnClickListener,
         if (id == R.id.btn_set_bg_color) {
             mNoteBgColorSelector.setVisibility(View.VISIBLE);
             findViewById(sBgSelectorSelectionMap.get(mWorkingNote.getBgColorId())).setVisibility(
-                    -                    View.VISIBLE);
-        } else if (sBgSelectorBtnsMap.containsKey(id)) {
+                    -View.VISIBLE);
+        }else if(id == R.id.btn_edit_menu){
+            openOptionsMenu();
+        }else if (sBgSelectorBtnsMap.containsKey(id)) {
             findViewById(sBgSelectorSelectionMap.get(mWorkingNote.getBgColorId())).setVisibility(
                     View.GONE);
             mWorkingNote.setBgColorId(sBgSelectorBtnsMap.get(id));
