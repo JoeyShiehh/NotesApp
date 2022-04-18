@@ -40,8 +40,7 @@
         android:debuggable="true"
         android:icon="@drawable/icon_app"
         android:label="MiNotes"
-        android:supportsRtl="true"
-        android:testOnly="true" >
+        android:supportsRtl="true" >
         <activity
             android:name="net.micode.notes.ui.NotesListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
