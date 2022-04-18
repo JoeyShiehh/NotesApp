@@ -37,10 +37,13 @@
 
     <application
         android:allowBackup="true"
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@drawable/icon_app"
         android:label="MiNotes"
-        android:supportsRtl="true" >
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/WithToolBar" >
         <activity
             android:name="net.micode.notes.ui.NotesListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

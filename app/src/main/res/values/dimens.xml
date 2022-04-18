@@ -21,4 +21,6 @@
     <dimen name="text_font_size_medium">20sp</dimen>
     <dimen name="text_font_size_normal">17sp</dimen>
     <dimen name="text_font_size_small">14sp</dimen>
+    <dimen name="btn_size_large">80dp</dimen>
+    <dimen name="btn_toScreenEdge_small">15dp</dimen>
 </resources>

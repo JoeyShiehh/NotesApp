@@ -21,20 +21,10 @@
     android:layout_height="fill_parent"
     android:background="@drawable/list_background">
 
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
-<!--        <TextView-->
-<!--            android:id="@+id/main_title"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="46dp"-->
-<!--            android:layout_gravity="top"-->
-<!--            android:background="@drawable/title_background"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="@dimen/text_font_size_large"-->
-<!--            android:text="@string/main_title" />-->
 
         <TextView
             android:id="@+id/tv_title_bar"
@@ -61,26 +51,39 @@
 <!--    <LinearLayout-->
 <!--        android:layout_width="fill_parent"-->
 <!--        android:layout_height="fill_parent"-->
+<!--        android:gravity="right"-->
 <!--        android:orientation="horizontal">-->
 
 <!--        <Button-->
 <!--            android:id="@+id/btn_new_note"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="bottom"-->
-<!--            android:background="@drawable/new_note"-->
+<!--            android:layout_gravity="bottom|right"-->
+<!--            android:background="@drawable/btn_create"-->
 <!--            android:focusable="false" />-->
 
 <!--    </LinearLayout>-->
-
     <Button
         android:id="@+id/btn_new_note"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="300dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/btn_create" />
+        android:layout_width="@dimen/btn_size_large"
+        android:layout_height="@dimen/btn_size_large"
+        android:layout_marginEnd="@dimen/btn_toScreenEdge_small"
+        android:layout_marginBottom="@dimen/btn_toScreenEdge_small"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/btn_create"
+        android:focusable="false"
+        android:layout_marginRight="@dimen/btn_toScreenEdge_small" />
+
+<!--    <android.support.design.widget.FloatingActionButton-->
+<!--        android:id="@+id/btn_new_note"-->
+<!--        android:src="@drawable/new1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="@dimen/btn_toScreenEdge_small"-->
+<!--        android:layout_marginBottom="@dimen/btn_toScreenEdge_small"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_marginRight="@dimen/btn_toScreenEdge_small"-->
+<!--        android:elevation="15dp"/>-->
 
 
 </FrameLayout>

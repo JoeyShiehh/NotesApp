@@ -19,16 +19,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_btn_create"
-        android:icon="@drawable/btn_create"
-        android:title="Create"
-        android:orderInCategory="0"
-        android:showAsAction="always"
-        tools:ignore="AppCompatResource" />
-    <item
         android:id="@+id/note_list_moreaction"
         android:title="More"
-        android:orderInCategory="1"
+        android:orderInCategory="0"
         android:icon="@drawable/menu_icon"
         android:showAsAction="always"
         tools:ignore="AppCompatResource">
