@@ -82,6 +82,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 
+import cn.refactor.lib.colordialog.PromptDialog;
+
 public class NotesListActivity extends Activity implements OnClickListener, OnItemLongClickListener {
     private static final int FOLDER_NOTE_LIST_QUERY_TOKEN = 0;
 
@@ -812,6 +814,20 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case id.about:{
+                new PromptDialog(this)
+                        .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                        .setAnimationEnable(true)
+                        .setTitleText("关于我们")
+                        .setContentText("北邮网安 软件工程大作业\n\n组员：谢思远 江增臻 林于翔\n\n2022.4-2022.6")
+                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                            @Override
+                            public void onClick(PromptDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+                break;
+            }
             case id.menu_new_folder: {
                 showCreateOrModifyFolderDialog(true);
                 break;
