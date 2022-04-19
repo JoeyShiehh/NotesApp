@@ -120,6 +120,10 @@
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\menu\\call_record_folder.xml"
     },
     {
+        "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_about.png.flat",
+        "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\about.png"
+    },
+    {
         "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\menu_note_list_dropdown.xml.flat",
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\menu\\note_list_dropdown.xml"
     },

@@ -289,6 +289,15 @@ color bright_foreground_material_dark
 color bright_foreground_material_light
 color button_material_dark
 color button_material_light
+color color_dialog_content
+color color_dialog_content_prompt
+color color_dialog_gray
+color color_dialog_title
+color color_type_help
+color color_type_info
+color color_type_success
+color color_type_warning
+color color_type_wrong
 color dim_foreground_disabled_material_dark
 color dim_foreground_disabled_material_light
 color dim_foreground_material_dark
@@ -526,6 +535,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable about
 drawable bg_btn_set_color
 drawable bg_color_btn_mask
 drawable btn_create
@@ -598,7 +608,23 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable search_result
+drawable sel_btn
+drawable sel_btn_help
+drawable sel_btn_info
+drawable sel_btn_success
+drawable sel_btn_warning
+drawable sel_btn_wrong
+drawable sel_def_gray
+drawable sel_def_gray_left
+drawable sel_def_gray_right
 drawable selected
+drawable shape_corners_bottom
+drawable shape_corners_bottom_normal
+drawable shape_left_bottom
+drawable shape_left_bottom_normal
+drawable shape_right_bottom
+drawable shape_right_bottom_normal
+drawable shape_top
 drawable title_alert
 drawable title_background
 drawable title_bar_bg
@@ -616,6 +642,7 @@ drawable widget_4x_green
 drawable widget_4x_red
 drawable widget_4x_white
 drawable widget_4x_yellow
+id about
 id account_dialog_subtitle
 id account_dialog_title
 id action0
@@ -646,6 +673,8 @@ id amPm
 id beginning
 id bin
 id bottom
+id btnNegative
+id btnPositive
 id btn_edit_menu
 id btn_new_note
 id btn_set_bg_color
@@ -663,6 +692,7 @@ id decor_content_parent
 id default_activity_button
 id delete
 id disableHome
+id divider
 id edit_query
 id end
 id end_padder
@@ -680,6 +710,7 @@ id ifRoom
 id image
 id info
 id item_touch_helper_previous_elevation
+id ivContent
 id iv_alert_icon
 id iv_bg_blue
 id iv_bg_blue_select
@@ -699,10 +730,16 @@ id line1
 id line3
 id listMode
 id list_item
+id llBkg
+id llBtnGroup
+id llContent
+id llTop
 id ll_font_large
 id ll_font_normal
 id ll_font_small
 id ll_font_super
+id loading
+id logoIv
 id media_actions
 id menu_alert
 id menu_delete
@@ -782,10 +819,13 @@ id title
 id titleDividerNoCustom
 id title_template
 id top
+id topLayout
 id topPanel
 id trm_menu_item_icon
 id trm_menu_item_text
 id trm_recyclerview
+id tvContent
+id tvTitle
 id tv_alert_date
 id tv_folder_name
 id tv_menu_date
@@ -836,6 +876,8 @@ layout add_account_text
 layout datetime_picker
 layout dialog_edit_text
 layout folder_list_item
+layout layout_colordialog
+layout layout_promptdialog
 layout note_edit
 layout note_edit_list_item
 layout note_item
@@ -874,6 +916,11 @@ menu note_list
 menu note_list_dropdown
 menu note_list_options
 menu sub_folder
+mipmap ic_help
+mipmap ic_info
+mipmap ic_success
+mipmap ic_wrong
+mipmap icon_warning
 plurals search_results_title
 raw introduction
 string abc_action_bar_home_description
@@ -907,6 +954,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string about_us
 string alert_message_delete_folder
 string alert_message_delete_note
 string alert_message_delete_notes
@@ -1377,6 +1425,7 @@ style Widget_AppCompat_Spinner_Underlined
 style Widget_AppCompat_TextView_SpinnerItem
 style Widget_AppCompat_Toolbar
 style Widget_AppCompat_Toolbar_Button_Navigation
+style color_dialog
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth
