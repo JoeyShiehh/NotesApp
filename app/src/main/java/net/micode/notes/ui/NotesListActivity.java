@@ -819,7 +819,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                         .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
                         .setAnimationEnable(true)
                         .setTitleText("关于我们")
-                        .setContentText("北邮网安 软件工程大作业\n\n组员：谢思远 江增臻 林于翔\n\n2022.4-2022.6")
+                        .setContentText("北邮网安 软件工程大作业\n\n成员：谢思远 江增臻 林于翔\n\n2022.4-2022.6")
                         .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
                             @Override
                             public void onClick(PromptDialog dialog) {
