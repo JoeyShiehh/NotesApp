@@ -5,6 +5,7 @@ INJECTED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifes
 INJECTED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:18:1-151:12
 INJECTED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:18:1-151:12
 MERGED from [com.zaaach:toprightmenu:1.1.2] C:\Users\л˼Զ\.gradle\caches\transforms-3\f651816ea0940d24f66680264b20af60\transformed\toprightmenu-1.1.2\AndroidManifest.xml:2:1-17:12
+MERGED from [com.github.andyxialm:ColorDialog:1.0.0] C:\Users\л˼Զ\.gradle\caches\transforms-3\82675a34018f95342a322d20e2dad853\transformed\ColorDialog-1.0.0\AndroidManifest.xml:2:1-12:12
 MERGED from [com.android.support:appcompat-v7:25.1.0] C:\Users\л˼Զ\.gradle\caches\transforms-3\050ac0ac44d8dc07d0356dfc1dedc1e6\transformed\appcompat-v7-25.1.0\AndroidManifest.xml:17:1-27:12
 MERGED from [com.android.support:recyclerview-v7:25.1.0] C:\Users\л˼Զ\.gradle\caches\transforms-3\d7153ec9d9855d42ffb2396da2af2b97\transformed\recyclerview-v7-25.1.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:25.1.0] C:\Users\л˼Զ\.gradle\caches\transforms-3\f202784ed69d99a73eb39409667a8301\transformed\animated-vector-drawable-25.1.0\AndroidManifest.xml:17:1-24:12
@@ -267,6 +268,8 @@ INJECTED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifes
 INJECTED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml
 MERGED from [com.zaaach:toprightmenu:1.1.2] C:\Users\л˼Զ\.gradle\caches\transforms-3\f651816ea0940d24f66680264b20af60\transformed\toprightmenu-1.1.2\AndroidManifest.xml:7:5-9:41
 MERGED from [com.zaaach:toprightmenu:1.1.2] C:\Users\л˼Զ\.gradle\caches\transforms-3\f651816ea0940d24f66680264b20af60\transformed\toprightmenu-1.1.2\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.andyxialm:ColorDialog:1.0.0] C:\Users\л˼Զ\.gradle\caches\transforms-3\82675a34018f95342a322d20e2dad853\transformed\ColorDialog-1.0.0\AndroidManifest.xml:8:5-10:41
+MERGED from [com.github.andyxialm:ColorDialog:1.0.0] C:\Users\л˼Զ\.gradle\caches\transforms-3\82675a34018f95342a322d20e2dad853\transformed\ColorDialog-1.0.0\AndroidManifest.xml:8:5-10:41
 MERGED from [com.android.support:appcompat-v7:25.1.0] C:\Users\л˼Զ\.gradle\caches\transforms-3\050ac0ac44d8dc07d0356dfc1dedc1e6\transformed\appcompat-v7-25.1.0\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:appcompat-v7:25.1.0] C:\Users\л˼Զ\.gradle\caches\transforms-3\050ac0ac44d8dc07d0356dfc1dedc1e6\transformed\appcompat-v7-25.1.0\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:recyclerview-v7:25.1.0] C:\Users\л˼Զ\.gradle\caches\transforms-3\d7153ec9d9855d42ffb2396da2af2b97\transformed\recyclerview-v7-25.1.0\AndroidManifest.xml:20:5-43
