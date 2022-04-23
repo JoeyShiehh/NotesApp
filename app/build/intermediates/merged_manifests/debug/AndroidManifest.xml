@@ -20,7 +20,7 @@
     android:versionName="1.1" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="15"
         android:targetSdkVersion="29" />
 
     <!-- <uses-sdk android:minSdkVersion="15" /> -->
@@ -38,15 +38,16 @@
     <application
         android:allowBackup="true"
         android:debuggable="true"
-        android:icon="@drawable/icon_app"
-        android:label="MiNotes"
-        android:supportsRtl="true" >
+        android:icon="@drawable/icon_app_wht"
+        android:label="@string/main_title"
+        android:supportsRtl="true"
+        android:testOnly="true" >
         <activity
             android:name="net.micode.notes.ui.NotesListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="MiNotes"
+            android:label="@string/main_title"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Holo.Light"
+            android:theme="@style/AppBaseTheme"
             android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

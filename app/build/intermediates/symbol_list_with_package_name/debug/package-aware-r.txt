@@ -564,6 +564,7 @@ drawable font_size_selector_bg
 drawable font_small
 drawable font_super
 drawable icon_app
+drawable icon_app_wht
 drawable list_background
 drawable list_blue_down
 drawable list_blue_middle
@@ -589,6 +590,7 @@ drawable list_yellow_single
 drawable list_yellow_up
 drawable menu_delete
 drawable menu_icon
+drawable menu_icon_wht
 drawable menu_move
 drawable new1
 drawable new_note_normal
@@ -1062,10 +1064,12 @@ string ticker_success
 string ticker_syncing
 string widget_havenot_content
 string widget_under_visit_mode
+style AcBar_titleStyle
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
 style Animation_AppCompat_DropDownUp
+style AppBaseTheme
 style Base_AlertDialog_AppCompat
 style Base_AlertDialog_AppCompat_Light
 style Base_Animation_AppCompat_Dialog
@@ -1426,6 +1430,7 @@ style Widget_AppCompat_TextView_SpinnerItem
 style Widget_AppCompat_Toolbar
 style Widget_AppCompat_Toolbar_Button_Navigation
 style color_dialog
+style my_actionbar_style
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth

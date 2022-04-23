@@ -17,11 +17,13 @@
 
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/menu_new_note"
-        android:icon="@drawable/btn_create_normal"
-        android:title="@string/notelist_menu_new"
-        android:orderInCategory="1"
-        tools:ignore="AppCompatResource" />
+        android:id="@+id/about"
+        android:title="@string/about_us"
+        android:icon="@drawable/about"
+        android:orderInCategory="0"
+        android:showAsAction="always"
+        tools:ignore="AppCompatResource"/>
+
+
 </menu>

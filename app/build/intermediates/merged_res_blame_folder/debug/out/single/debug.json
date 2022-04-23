@@ -176,6 +176,10 @@
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\layout\\note_list_dropdown_menu.xml"
     },
     {
+        "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_icon_app_wht.png.flat",
+        "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\icon_app_wht.png"
+    },
+    {
         "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_list_green_middle.9.png.flat",
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\list_green_middle.9.png"
     },
@@ -394,6 +398,10 @@
     {
         "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_font_size_selector_bg.9.png.flat",
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\font_size_selector_bg.9.png"
+    },
+    {
+        "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_menu_icon_wht.png.flat",
+        "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\menu_icon_wht.png"
     },
     {
         "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_font_small.png.flat",

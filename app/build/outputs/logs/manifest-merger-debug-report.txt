@@ -96,18 +96,18 @@ MERGED from [com.android.support:support-compat:25.1.0] C:\Users\л˼Զ\.gradle\
 	android:supportsRtl
 		ADDED from [com.zaaach:toprightmenu:1.1.2] C:\Users\л˼Զ\.gradle\caches\transforms-3\f651816ea0940d24f66680264b20af60\transformed\toprightmenu-1.1.2\AndroidManifest.xml:14:9-35
 	android:label
-		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:38:9-32
+		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:38:9-43
 		REJECTED from [com.zaaach:toprightmenu:1.1.2] C:\Users\л˼Զ\.gradle\caches\transforms-3\f651816ea0940d24f66680264b20af60\transformed\toprightmenu-1.1.2\AndroidManifest.xml:13:9-41
 	android:allowBackup
 		ADDED from [com.zaaach:toprightmenu:1.1.2] C:\Users\л˼Զ\.gradle\caches\transforms-3\f651816ea0940d24f66680264b20af60\transformed\toprightmenu-1.1.2\AndroidManifest.xml:12:9-35
 	android:icon
-		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:37:9-42
+		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:37:9-46
 	tools:replace
 		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:39:9-38
 activity#net.micode.notes.ui.NotesListActivity
 ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:40:9-52:20
 	android:label
-		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:43:13-36
+		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:43:13-47
 	android:launchMode
 		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:44:13-43
 	android:windowSoftInputMode
@@ -115,7 +115,7 @@ ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.x
 	android:configChanges
 		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:42:13-74
 	android:theme
-		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:45:13-60
+		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:45:13-48
 	android:name
 		ADDED from E:\.code_project\Android_Studio\MiNote\app\src\main\AndroidManifest.xml:41:13-49
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER

@@ -125,5 +125,6 @@
     </plurals>
     <string name="press_back_twice">再按一次退出程序</string>
     <string name="main_title">便签</string>
+    <string name="about_us">关于我们</string>
 
 </resources>

@@ -34,15 +34,15 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:icon="@drawable/icon_app"
-        android:label="MiNotes"
+        android:icon="@drawable/icon_app_wht"
+        android:label="@string/main_title"
         tools:replace="android:label">
         <activity
             android:name=".ui.NotesListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="MiNotes"
+            android:label="@string/main_title"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Holo.Light"
+            android:theme="@style/AppBaseTheme"
             android:windowSoftInputMode="adjustPan">
 
             <intent-filter>

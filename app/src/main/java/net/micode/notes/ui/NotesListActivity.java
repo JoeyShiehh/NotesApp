@@ -18,7 +18,6 @@ package net.micode.notes.ui;
 
 import static net.micode.notes.R.*;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -692,8 +691,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 mState = ListEditState.NOTE_LIST;
                 startAsyncNotesListQuery();
                 mTitleBar.setVisibility(View.GONE);
-                ActionBar actionBar = getActionBar();
-                actionBar.show();
+                invalidateOptionsMenu();
                 break;
             case CALL_RECORD_FOLDER:
                 mCurrentFolderId = Notes.ID_ROOT_FOLDER;
@@ -942,8 +940,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                     case NOTE_LIST:
                         if (item.getType() == Notes.TYPE_FOLDER
                                 || item.getType() == Notes.TYPE_SYSTEM) {
-                            ActionBar actionBar = getActionBar();
-                            actionBar.hide();
+                            invalidateOptionsMenu();
                             openFolder(item);
                         } else if (item.getType() == Notes.TYPE_NOTE) {
                             openNode(item);
