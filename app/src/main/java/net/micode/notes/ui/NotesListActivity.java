@@ -252,7 +252,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             getMenuInflater().inflate(R.menu.note_list_options, menu);
-            Log.d(TAG, "onCreateActionMode");
+            Log.d(TAG, "ModeCallback.onCreateActionMode");
             menu.findItem(id.delete).setOnMenuItemClickListener(this);
             mMoveMenu = menu.findItem(id.move);
             if (mFocusNoteDataItem.getParentId() == Notes.ID_CALL_RECORD_FOLDER
@@ -265,7 +265,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             mActionMode = mode;
             mNotesListAdapter.setChoiceMode(true);
             mNotesListView.setLongClickable(false);
-//            mAddNewNote.setVisibility(View.GONE);
+            mAddNewNote.setVisibility(View.GONE);
 
             View customView = LayoutInflater.from(NotesListActivity.this).inflate(
                     layout.note_list_dropdown_menu, null);
@@ -328,6 +328,8 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         }
 
         public boolean onMenuItemClick(MenuItem item) {
+            // 单个便签长按动作
+            Log.d(TAG,"ModeCallback.onMenuItemClick");
             if (mNotesListAdapter.getSelectedCount() == 0) {
                 Toast.makeText(NotesListActivity.this, getString(string.menu_select_none),
                         Toast.LENGTH_SHORT).show();
@@ -492,8 +494,11 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 HashSet<AppWidgetAttribute> widgets = mNotesListAdapter.getSelectedWidget();
                 if (!isSyncMode()) {
                     // if not synced, delete notes directly
-                    if (DataUtils.batchDeleteNotes(mContentResolver, mNotesListAdapter
-                            .getSelectedItemIds())) {
+//                    if (DataUtils.batchDeleteNotes(mContentResolver, mNotesListAdapter
+//                            .getSelectedItemIds())) {
+                    if (DataUtils.batchMoveToFolder(mContentResolver, mNotesListAdapter
+                            .getSelectedItemIds(), Notes.ID_RECYCLE_BIN)) {
+                        Log.d(TAG,"batchMoveToFolder:Notes.ID_RECYCLE_BIN");
                     } else {
                         Log.e(TAG, "Delete notes error, should not happens");
                     }
@@ -536,6 +541,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         if (!isSyncMode()) {
             // if not synced, delete folder directly
             DataUtils.batchDeleteNotes(mContentResolver, ids);
+//            DataUtils.batchMoveToFolder(mContentResolver, ids, Notes.ID_TRASH_FOLER);
         } else {
             // in sync mode, we'll move the deleted folder into the trash folder
             DataUtils.batchMoveToFolder(mContentResolver, ids, Notes.ID_TRASH_FOLER);
@@ -549,7 +555,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             }
         }
     }
-
+    //  打开编辑单个便签的界面
     private void openNode(NoteItemData data) {
         Intent intent = new Intent(this, NoteEditActivity.class);
         intent.setAction(Intent.ACTION_VIEW);
@@ -559,11 +565,14 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     private void openFolder(NoteItemData data) {
         mCurrentFolderId = data.getId();
+        Log.d(TAG,Long.toString(mCurrentFolderId));
         startAsyncNotesListQuery();
         if (data.getId() == Notes.ID_CALL_RECORD_FOLDER) {
+            Log.d(TAG,"mState = ListEditState.CALL_RECORD_FOLDER");
             mState = ListEditState.CALL_RECORD_FOLDER;
 //            mAddNewNote.setVisibility(View.GONE);
         } else {
+            Log.d(TAG,"mState = ListEditState.SUB_FOLDER");
             mState = ListEditState.SUB_FOLDER;
         }
         if (data.getId() == Notes.ID_CALL_RECORD_FOLDER) {
@@ -736,6 +745,8 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     private final OnCreateContextMenuListener mFolderOnCreateContextMenuListener = new OnCreateContextMenuListener() {
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+            //长按文件夹弹出的菜单,onContextItemSelected(MenuItem item)是对应按钮操作
+            Log.d(TAG,"onCreateContextMenu");
             if (mFocusNoteDataItem != null) {
                 menu.setHeaderTitle(mFocusNoteDataItem.getSnippet());
                 menu.add(0, MENU_FOLDER_VIEW, 0, string.menu_folder_view);
@@ -755,6 +766,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        //长按文件夹的可选操作
         if (mFocusNoteDataItem == null) {
             Log.e(TAG, "The long click data item is null");
             return false;
@@ -763,7 +775,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             case MENU_FOLDER_VIEW:
                 openFolder(mFocusNoteDataItem);
                 break;
-            case MENU_FOLDER_DELETE:
+            case MENU_FOLDER_DELETE: // 删除文件夹
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(getString(string.alert_title_delete));
                 builder.setIcon(android.R.drawable.ic_dialog_alert);
@@ -922,7 +934,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     }
 
     private class OnListItemClickListener implements OnItemClickListener {
-
+    // ListView中每个item的点击事件
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Log.d(TAG,"onItemClick");
             if (view instanceof NotesListItem) {
@@ -943,6 +955,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                             invalidateOptionsMenu();
                             openFolder(item);
                         } else if (item.getType() == Notes.TYPE_NOTE) {
+                            //打开编辑单个便签的界面
                             openNode(item);
                         } else {
                             Log.e(TAG, "Wrong note type in NOTE_LIST");

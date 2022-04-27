@@ -34,6 +34,7 @@ public class Notes {
     public static final int ID_TEMPARAY_FOLDER = -1;
     public static final int ID_CALL_RECORD_FOLDER = -2;
     public static final int ID_TRASH_FOLER = -3;
+    public static final int ID_RECYCLE_BIN = -4;
 
     public static final String INTENT_EXTRA_ALERT_DATE = "net.micode.notes.alert_date";
     public static final String INTENT_EXTRA_BACKGROUND_ID = "net.micode.notes.background_color_id";
