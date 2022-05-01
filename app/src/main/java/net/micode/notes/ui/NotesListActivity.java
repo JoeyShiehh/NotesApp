@@ -82,6 +82,7 @@ import java.io.InputStreamReader;
 import java.util.HashSet;
 
 import cn.refactor.lib.colordialog.PromptDialog;
+import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
 
 public class NotesListActivity extends Activity implements OnClickListener, OnItemLongClickListener {
     private static final int FOLDER_NOTE_LIST_QUERY_TOKEN = 0;
@@ -146,7 +147,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         super.onCreate(savedInstanceState);
         setContentView(layout.note_list);
         initResources();
-
+        SQLiteStudioService.instance().start(this);
         /**
          * Insert an introduction when user firstly use this application
          */
