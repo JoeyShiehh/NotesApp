@@ -127,5 +127,6 @@
     <string name="press_back_twice">再按一次退出程序</string>
     <string name="main_title">便籤</string>
     <string name="about_us">关于</string>
+    <string name="recover">恢复</string>
 
 </resources>

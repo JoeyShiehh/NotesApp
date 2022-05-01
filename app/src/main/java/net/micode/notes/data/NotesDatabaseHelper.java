@@ -51,6 +51,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
             NoteColumns.CREATED_DATE + " INTEGER NOT NULL DEFAULT (strftime('%s','now') * 1000)," +
             NoteColumns.HAS_ATTACHMENT + " INTEGER NOT NULL DEFAULT 0," +
             NoteColumns.MODIFIED_DATE + " INTEGER NOT NULL DEFAULT (strftime('%s','now') * 1000)," +
+            NoteColumns.DELETE_DATE + " INTEGER NOT NULL DEFAULT 0," +
             NoteColumns.NOTES_COUNT + " INTEGER NOT NULL DEFAULT 0," +
             NoteColumns.SNIPPET + " TEXT NOT NULL DEFAULT ''," +
             NoteColumns.TYPE + " INTEGER NOT NULL DEFAULT 0," +
@@ -266,6 +267,14 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
          */
         values.clear();
         values.put(NoteColumns.ID, Notes.ID_TRASH_FOLER);
+        values.put(NoteColumns.TYPE, Notes.TYPE_SYSTEM);
+        db.insert(TABLE.NOTE, null, values);
+
+        /**
+         * 创建回收站文件夹
+         */
+        values.clear();
+        values.put(NoteColumns.ID, Notes.ID_RECYCLE_BIN);
         values.put(NoteColumns.TYPE, Notes.TYPE_SYSTEM);
         db.insert(TABLE.NOTE, null, values);
     }

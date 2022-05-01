@@ -87,6 +87,12 @@ public class Notes {
          */
         public static final String MODIFIED_DATE = "modified_date";
 
+        /**
+         * 删除便签的时间
+         * <P> Type: INTEGER (long)</P>
+         */
+        public static final String DELETE_DATE = "delete_date";
+
 
         /**
          * Alert date

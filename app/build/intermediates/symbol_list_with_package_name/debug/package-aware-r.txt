@@ -538,6 +538,7 @@ drawable abc_vector_test
 drawable about
 drawable bg_btn_set_color
 drawable bg_color_btn_mask
+drawable bin
 drawable btn_create
 drawable btn_create_medium
 drawable btn_create_normal
@@ -609,6 +610,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable restore
 drawable search_result
 drawable sel_btn
 drawable sel_btn_help
@@ -780,6 +782,7 @@ id preference_sync_button
 id progress_circular
 id progress_horizontal
 id radio
+id restore
 id right_icon
 id right_side
 id screen
@@ -917,6 +920,7 @@ menu note_edit
 menu note_list
 menu note_list_dropdown
 menu note_list_options
+menu note_list_options_recycle_bin
 menu sub_folder
 mipmap ic_help
 mipmap ic_info
@@ -1045,6 +1049,7 @@ string preferences_title
 string preferences_toast_cannot_change_account
 string preferences_toast_success_set_accout
 string press_back_twice
+string recover
 string recycle_bin
 string search
 string search_hint

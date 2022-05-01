@@ -18,6 +18,7 @@ package net.micode.notes.ui;
 
 import static net.micode.notes.R.*;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -33,6 +34,7 @@ import android.database.Cursor;
 import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -99,7 +101,9 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     private enum ListEditState {
         NOTE_LIST, SUB_FOLDER, CALL_RECORD_FOLDER, RECYCLE_BIN
-    };
+    }
+
+    ;
 
     private ListEditState mState;
 
@@ -142,6 +146,9 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     private final static int REQUEST_CODE_NEW_NODE = 103;
 
     private long firstPressBackTime = 0;
+
+    private boolean isInRecycleBin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -252,10 +259,15 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         private MenuItem mMoveMenu;
 
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            getMenuInflater().inflate(R.menu.note_list_options, menu);
+            if(!isInRecycleBin){
+                getMenuInflater().inflate(R.menu.note_list_options, menu);
+                mMoveMenu = menu.findItem(id.move);
+            }else {
+                getMenuInflater().inflate(R.menu.note_list_options_recycle_bin, menu);
+                mMoveMenu = menu.findItem(id.restore);
+            }
             Log.d(TAG, "ModeCallback.onCreateActionMode");
             menu.findItem(id.delete).setOnMenuItemClickListener(this);
-            mMoveMenu = menu.findItem(id.move);
             if (mFocusNoteDataItem.getParentId() == Notes.ID_CALL_RECORD_FOLDER
                     || DataUtils.getUserFolderCount(mContentResolver) == 0) {
                 mMoveMenu.setVisible(true);
@@ -315,7 +327,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         public void onDestroyActionMode(ActionMode mode) {
             mNotesListAdapter.setChoiceMode(false);
             mNotesListView.setLongClickable(true);
-//            mAddNewNote.setVisibility(View.VISIBLE);
+            mAddNewNote.setVisibility(View.VISIBLE);
         }
 
         public void finishActionMode() {
@@ -330,7 +342,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
         public boolean onMenuItemClick(MenuItem item) {
             // 单个便签长按动作
-            Log.d(TAG,"ModeCallback.onMenuItemClick");
+            Log.d(TAG, "ModeCallback.onMenuItemClick");
             if (mNotesListAdapter.getSelectedCount() == 0) {
                 Toast.makeText(NotesListActivity.this, getString(string.menu_select_none),
                         Toast.LENGTH_SHORT).show();
@@ -357,6 +369,8 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 case id.move:
                     startQueryDestinationFolders();
                     break;
+                case id.restore:
+                    DataUtils.batchMoveToFolder(mContentResolver, mNotesListAdapter.getSelectedItemIds(), Notes.ID_ROOT_FOLDER);
                 default:
                     return false;
             }
@@ -381,15 +395,15 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                         eventY -= mTitleBar.getHeight();
                         start -= mTitleBar.getHeight();
                     }
-                        /**
-                        * HACKME:When click the transparent part of "New Note" button, dispatch
-                        * the event to the list view behind this button. The transparent part of
-                        * "New Note" button could be expressed by formula y=-0.12x+94（Unit:pixel）
-                        * and the line top of the button. The coordinate based on left of the "New
-                        * Note" button. The 94 represents maximum height of the transparent part.
-                        * Notice that, if the background of the button changes, the formula should
-                        * also change. This is very bad, just for the UI designer's strong requirement.
-                        */
+                    /**
+                     * HACKME:When click the transparent part of "New Note" button, dispatch
+                     * the event to the list view behind this button. The transparent part of
+                     * "New Note" button could be expressed by formula y=-0.12x+94（Unit:pixel）
+                     * and the line top of the button. The coordinate based on left of the "New
+                     * Note" button. The 94 represents maximum height of the transparent part.
+                     * Notice that, if the background of the button changes, the formula should
+                     * also change. This is very bad, just for the UI designer's strong requirement.
+                     */
                     if (event.getY() < (event.getX() * (-0.12) + 94)) {
                         View view = mNotesListView.getChildAt(mNotesListView.getChildCount() - 1
                                 - mNotesListView.getFooterViewsCount());
@@ -495,11 +509,12 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 HashSet<AppWidgetAttribute> widgets = mNotesListAdapter.getSelectedWidget();
                 if (!isSyncMode()) {
                     // if not synced, delete notes directly
-//                    if (DataUtils.batchDeleteNotes(mContentResolver, mNotesListAdapter
-//                            .getSelectedItemIds())) {
-                    if (DataUtils.batchMoveToFolder(mContentResolver, mNotesListAdapter
+                    if (isInRecycleBin && DataUtils.batchDeleteNotes(mContentResolver, mNotesListAdapter
+                            .getSelectedItemIds())) {
+                    }
+                    if (!isInRecycleBin && DataUtils.batchMoveToFolder(mContentResolver, mNotesListAdapter
                             .getSelectedItemIds(), Notes.ID_RECYCLE_BIN)) {
-                        Log.d(TAG,"batchMoveToFolder:Notes.ID_RECYCLE_BIN");
+                        Log.d(TAG, "batchMoveToFolder:Notes.ID_RECYCLE_BIN");
                     } else {
                         Log.e(TAG, "Delete notes error, should not happens");
                     }
@@ -541,8 +556,14 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 folderId);
         if (!isSyncMode()) {
             // if not synced, delete folder directly
-            DataUtils.batchDeleteNotes(mContentResolver, ids);
-//            DataUtils.batchMoveToFolder(mContentResolver, ids, Notes.ID_TRASH_FOLER);
+//            DataUtils.batchDeleteNotes(mContentResolver, ids);
+            if (isInRecycleBin) {
+                Toast.makeText(NotesListActivity.this, "已彻底删除", Toast.LENGTH_LONG).show();
+                DataUtils.batchDeleteNotes(mContentResolver, ids);
+            } else {
+                Toast.makeText(NotesListActivity.this, "已删除，可在回收站恢复", Toast.LENGTH_LONG).show();
+                DataUtils.batchMoveToFolder(mContentResolver, ids, Notes.ID_TRASH_FOLER);
+            }
         } else {
             // in sync mode, we'll move the deleted folder into the trash folder
             DataUtils.batchMoveToFolder(mContentResolver, ids, Notes.ID_TRASH_FOLER);
@@ -556,6 +577,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             }
         }
     }
+
     //  打开编辑单个便签的界面
     private void openNode(NoteItemData data) {
         Intent intent = new Intent(this, NoteEditActivity.class);
@@ -566,14 +588,14 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     private void openFolder(NoteItemData data) {
         mCurrentFolderId = data.getId();
-        Log.d(TAG,Long.toString(mCurrentFolderId));
+        Log.d(TAG, Long.toString(mCurrentFolderId));
         startAsyncNotesListQuery();
         if (data.getId() == Notes.ID_CALL_RECORD_FOLDER) {
-            Log.d(TAG,"mState = ListEditState.CALL_RECORD_FOLDER");
+            Log.d(TAG, "mState = ListEditState.CALL_RECORD_FOLDER");
             mState = ListEditState.CALL_RECORD_FOLDER;
 //            mAddNewNote.setVisibility(View.GONE);
         } else {
-            Log.d(TAG,"mState = ListEditState.SUB_FOLDER");
+            Log.d(TAG, "mState = ListEditState.SUB_FOLDER");
             mState = ListEditState.SUB_FOLDER;
         }
         if (data.getId() == Notes.ID_CALL_RECORD_FOLDER) {
@@ -582,7 +604,9 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             mTitleBar.setText(data.getSnippet());
         }
         mTitleBar.setVisibility(View.VISIBLE);
-        mAddNewNote.setVisibility(View.VISIBLE);
+        if(!isInRecycleBin) {
+            mAddNewNote.setVisibility(View.VISIBLE);
+        }
     }
 
     public void onClick(View v) {
@@ -697,11 +721,28 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         Log.e(TAG, "onBackPressed");
         switch (mState) {
             case SUB_FOLDER:
+                if (!isInRecycleBin) {
+                    mCurrentFolderId = Notes.ID_ROOT_FOLDER;
+                    mState = ListEditState.NOTE_LIST;
+                } else {
+                    mCurrentFolderId = Notes.ID_RECYCLE_BIN;
+                    mState = ListEditState.RECYCLE_BIN;
+                }
+                startAsyncNotesListQuery();
+                mTitleBar.setVisibility(View.GONE);
+                invalidateOptionsMenu();
+                break;
+            case RECYCLE_BIN:
                 mCurrentFolderId = Notes.ID_ROOT_FOLDER;
                 mState = ListEditState.NOTE_LIST;
                 startAsyncNotesListQuery();
                 mTitleBar.setVisibility(View.GONE);
                 invalidateOptionsMenu();
+                ActionBar actionBar = getActionBar();
+                actionBar.setTitle(string.app_name);
+                actionBar.setIcon(drawable.icon_app);
+                isInRecycleBin = false;
+                mAddNewNote.setVisibility(View.VISIBLE);
                 break;
             case CALL_RECORD_FOLDER:
                 mCurrentFolderId = Notes.ID_ROOT_FOLDER;
@@ -747,7 +788,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     private final OnCreateContextMenuListener mFolderOnCreateContextMenuListener = new OnCreateContextMenuListener() {
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
             //长按文件夹弹出的菜单,onContextItemSelected(MenuItem item)是对应按钮操作
-            Log.d(TAG,"onCreateContextMenu");
+            Log.d(TAG, "onCreateContextMenu");
             if (mFocusNoteDataItem != null) {
                 menu.setHeaderTitle(mFocusNoteDataItem.getSnippet());
                 menu.add(0, MENU_FOLDER_VIEW, 0, string.menu_folder_view);
@@ -813,10 +854,10 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             getMenuInflater().inflate(R.menu.sub_folder, menu);
         } else if (mState == ListEditState.CALL_RECORD_FOLDER) {
             getMenuInflater().inflate(R.menu.call_record_folder, menu);
-        } else if(mState == ListEditState.RECYCLE_BIN){
+        } else if (mState == ListEditState.RECYCLE_BIN) {
             //此处需要设计回收站的menu,定义为recycle_menu
-            //getMenuInflater().inflate(R.menu.recycle_bin, menu);
-        } else{
+            getMenuInflater().inflate(R.menu.sub_folder, menu);
+        } else {
             Log.e(TAG, "Wrong state:" + mState);
         }
         return true;
@@ -825,7 +866,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case id.about:{
+            case id.about: {
                 new PromptDialog(this)
                         .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
                         .setAnimationEnable(true)
@@ -869,6 +910,17 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             }
             case id.menu_search:
                 onSearchRequested();
+                break;
+            case id.bin:
+                mCurrentFolderId = Notes.ID_RECYCLE_BIN;
+                mState = ListEditState.RECYCLE_BIN;
+                isInRecycleBin = true;
+                ActionBar actionBar = getActionBar();
+                actionBar.setTitle("回收站");
+                actionBar.setIcon(drawable.bin);
+                startAsyncNotesListQuery();
+                mAddNewNote.setVisibility(View.GONE);
+                invalidateOptionsMenu();
                 break;
             default:
                 break;
@@ -935,9 +987,9 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     }
 
     private class OnListItemClickListener implements OnItemClickListener {
-    // ListView中每个item的点击事件
+        // ListView中每个item的点击事件
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.d(TAG,"onItemClick");
+            Log.d(TAG, "onItemClick");
             if (view instanceof NotesListItem) {
                 NoteItemData item = ((NotesListItem) view).getItemData();
                 if (mNotesListAdapter.isInChoiceMode()) {
@@ -951,8 +1003,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
                 switch (mState) {
                     case NOTE_LIST:
-                        if (item.getType() == Notes.TYPE_FOLDER
-                                || item.getType() == Notes.TYPE_SYSTEM) {
+                        if (item.getType() == Notes.TYPE_FOLDER || item.getType() == Notes.TYPE_SYSTEM) {
                             invalidateOptionsMenu();
                             openFolder(item);
                         } else if (item.getType() == Notes.TYPE_NOTE) {
@@ -964,14 +1015,24 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                         break;
                     case SUB_FOLDER:
                     case CALL_RECORD_FOLDER:
-                        if (item.getType() == Notes.TYPE_NOTE) {
+                        if (!isInRecycleBin && item.getType() == Notes.TYPE_NOTE) {
 //                            getMenuInflater().inflate(R.menu.sub_folder);
                             openNode(item);
-                        } else {
+                        } else if(isInRecycleBin){
+                            Toast.makeText(NotesListActivity.this,"回收站无法编辑，请恢复后编辑",Toast.LENGTH_SHORT).show();
+                        } else{
                             Log.e(TAG, "Wrong note type in SUB_FOLDER");
                         }
                         break;
                     case RECYCLE_BIN:
+                        if (item.getType() == Notes.TYPE_FOLDER || item.getType() == Notes.TYPE_SYSTEM) {
+                            invalidateOptionsMenu();
+                            openFolder(item);
+                        } else if (item.getType() == Notes.TYPE_NOTE) {
+                            Toast.makeText(NotesListActivity.this,"回收站无法编辑，请恢复后编辑",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.e(TAG, "Wrong note type in NOTE_LIST");
+                        }
                         break;
                     default:
                         break;

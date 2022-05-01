@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/restore"
+        android:title="@string/recover"
+        android:icon="@drawable/restore"
+        android:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/delete"
+        android:title="@string/menu_delete"
+        android:icon="@drawable/menu_delete"
+        android:showAsAction="always" />
+</menu>

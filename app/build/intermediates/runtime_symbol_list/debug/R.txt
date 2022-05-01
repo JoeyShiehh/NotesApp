@@ -537,6 +537,7 @@ int drawable abc_vector_test 0x7f070052
 int drawable about 0x7f070053
 int drawable bg_btn_set_color 0x7f070054
 int drawable bg_color_btn_mask 0x7f070055
+int drawable bin 0x7f0700c0
 int drawable btn_create 0x7f070056
 int drawable btn_create_medium 0x7f070057
 int drawable btn_create_normal 0x7f070058
@@ -608,6 +609,7 @@ int drawable notification_template_icon_bg 0x7f070099
 int drawable notification_template_icon_low_bg 0x7f07009a
 int drawable notification_tile_bg 0x7f07009b
 int drawable notify_panel_notification_icon_bg 0x7f07009c
+int drawable restore 0x7f0700c1
 int drawable search_result 0x7f07009d
 int drawable sel_btn 0x7f07009e
 int drawable sel_btn_help 0x7f07009f
@@ -779,6 +781,7 @@ int id preference_sync_button 0x7f080084
 int id progress_circular 0x7f080085
 int id progress_horizontal 0x7f080086
 int id radio 0x7f080087
+int id restore 0x7f0800c6
 int id right_icon 0x7f080088
 int id right_side 0x7f080089
 int id screen 0x7f08008a
@@ -916,6 +919,7 @@ int menu note_edit 0x7f0b0002
 int menu note_list 0x7f0b0003
 int menu note_list_dropdown 0x7f0b0004
 int menu note_list_options 0x7f0b0005
+int menu note_list_options_recycle_bin 0x7f0b0007
 int menu sub_folder 0x7f0b0006
 int mipmap ic_help 0x7f0c0000
 int mipmap ic_info 0x7f0c0001
@@ -1044,6 +1048,7 @@ int string preferences_title 0x7f0f0074
 int string preferences_toast_cannot_change_account 0x7f0f0075
 int string preferences_toast_success_set_accout 0x7f0f0076
 int string press_back_twice 0x7f0f0077
+int string recover 0x7f0f008b
 int string recycle_bin 0x7f0f0078
 int string search 0x7f0f0079
 int string search_hint 0x7f0f007a
