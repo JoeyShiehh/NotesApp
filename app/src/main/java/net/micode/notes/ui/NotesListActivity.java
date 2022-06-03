@@ -361,6 +361,11 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
                                     batchDelete();
+                                    if(!isInRecycleBin){
+                                        Toast.makeText(NotesListActivity.this, string.moveto_bin,Toast.LENGTH_LONG).show();
+                                    }else {
+                                        Toast.makeText(NotesListActivity.this, string.deep_delete,Toast.LENGTH_LONG).show();
+                                    }
                                 }
                             });
                     builder.setNegativeButton(android.R.string.cancel, null);
@@ -371,6 +376,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                     break;
                 case id.restore:
                     DataUtils.batchMoveToFolder(mContentResolver, mNotesListAdapter.getSelectedItemIds(), Notes.ID_ROOT_FOLDER);
+                    Toast.makeText(NotesListActivity.this, string.successful_recovery,Toast.LENGTH_LONG).show();
                 default:
                     return false;
             }
@@ -558,10 +564,10 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             // if not synced, delete folder directly
 //            DataUtils.batchDeleteNotes(mContentResolver, ids);
             if (isInRecycleBin) {
-                Toast.makeText(NotesListActivity.this, "已彻底删除", Toast.LENGTH_LONG).show();
+                Toast.makeText(NotesListActivity.this, string.deep_delete, Toast.LENGTH_LONG).show();
                 DataUtils.batchDeleteNotes(mContentResolver, ids);
             } else {
-                Toast.makeText(NotesListActivity.this, "已删除，可在回收站恢复", Toast.LENGTH_LONG).show();
+                Toast.makeText(NotesListActivity.this, string.moveto_bin, Toast.LENGTH_LONG).show();
                 DataUtils.batchMoveToFolder(mContentResolver, ids, Notes.ID_TRASH_FOLER);
             }
         } else {

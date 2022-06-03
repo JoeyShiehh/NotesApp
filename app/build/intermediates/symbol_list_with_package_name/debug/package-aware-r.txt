@@ -629,6 +629,7 @@ drawable shape_left_bottom_normal
 drawable shape_right_bottom
 drawable shape_right_bottom_normal
 drawable shape_top
+drawable sorticon
 drawable title_alert
 drawable title_background
 drawable title_bar_bg
@@ -766,6 +767,7 @@ id navigation_bar
 id never
 id none
 id normal
+id normally
 id note_bg_color_selector
 id note_edit_list
 id note_edit_view
@@ -805,6 +807,7 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id sort
 id spacer
 id split_action_bar
 id src_atop
@@ -844,6 +847,7 @@ id useLogo
 id widget_bg_image
 id widget_text
 id withText
+id with_star
 id wrap_content
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
@@ -972,6 +976,7 @@ string button_delete
 string call_record_folder_name
 string datetime_dialog_cancel
 string datetime_dialog_ok
+string deep_delete
 string delete_remind_time_message
 string error_note_empty_for_clock
 string error_note_empty_for_send_to_desktop
@@ -1021,6 +1026,7 @@ string menu_share
 string menu_sync
 string menu_sync_cancel
 string menu_title_select_folder
+string moveto_bin
 string note_alert_expired
 string note_link_email
 string note_link_other
@@ -1057,9 +1063,11 @@ string search_label
 string search_menu_title
 string search_setting_description
 string set_remind_time_message
+string sortway
 string status_bar_notification_info_overflow
 string success_sdcard_export
 string success_sync_account
+string successful_recovery
 string sync_progress_init_list
 string sync_progress_login
 string sync_progress_syncing

@@ -103,7 +103,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         " AFTER UPDATE OF " + NoteColumns.PARENT_ID + " ON " + TABLE.NOTE +
         " BEGIN " +
         "  UPDATE " + TABLE.NOTE +
-        "   SET " + NoteColumns.NOTES_COUNT + "=" + NoteColumns.NOTES_COUNT + "-1" +
+        "   SET " + NoteColumns.NOTES_COUNT + "=" + NoteColumns.NOTES_COUNT + "-1" + "," + NoteColumns.DELETE_DATE + "=" +"(strftime('%s','now') * 1000)"+
         "  WHERE " + NoteColumns.ID + "=old." + NoteColumns.PARENT_ID +
         "  AND " + NoteColumns.NOTES_COUNT + ">0" + ";" +
         " END";
