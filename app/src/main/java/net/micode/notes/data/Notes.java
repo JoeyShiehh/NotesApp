@@ -172,6 +172,16 @@ public class Notes {
          * <P> Type : INTEGER (long) </P>
          */
         public static final String VERSION = "version";
+
+        /**
+         * 是否删除
+         */
+        public static final String IS_DELETE = "is_delete";
+
+        /**
+         * 是否星标
+         */
+        public static final String IS_STAR = "is_star";
     }
 
     public interface DataColumns {

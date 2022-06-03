@@ -168,12 +168,12 @@
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\list_green_single.9.png"
     },
     {
-        "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_list_yellow_middle.9.png.flat",
-        "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\list_yellow_middle.9.png"
-    },
-    {
         "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\layout_note_list_dropdown_menu.xml.flat",
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\layout\\note_list_dropdown_menu.xml"
+    },
+    {
+        "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_list_yellow_middle.9.png.flat",
+        "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\list_yellow_middle.9.png"
     },
     {
         "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_icon_app_wht.png.flat",
@@ -280,6 +280,10 @@
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\menu\\note_list.xml"
     },
     {
+        "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_sort.png.flat",
+        "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\sort.png"
+    },
+    {
         "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\xml_preferences.xml.flat",
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\xml\\preferences.xml"
     },
@@ -314,6 +318,10 @@
     {
         "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_widget_4x_green.png.flat",
         "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\widget_4x_green.png"
+    },
+    {
+        "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_star.png.flat",
+        "source": "E:\\.code_project\\Android_Studio\\MiNote\\app\\src\\main\\res\\drawable-hdpi\\star.png"
     },
     {
         "merged": "E:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\merged_res\\debug\\menu_note_edit.xml.flat",

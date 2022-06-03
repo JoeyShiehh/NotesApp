@@ -629,7 +629,8 @@ drawable shape_left_bottom_normal
 drawable shape_right_bottom
 drawable shape_right_bottom_normal
 drawable shape_top
-drawable sorticon
+drawable sort
+drawable star
 drawable title_alert
 drawable title_background
 drawable title_bar_bg
@@ -672,6 +673,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_star
 id alertTitle
 id always
 id amPm

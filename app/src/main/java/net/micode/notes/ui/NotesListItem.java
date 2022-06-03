@@ -94,7 +94,12 @@ public class NotesListItem extends LinearLayout {
                 }
             }
         }
-        mTime.setText(DateUtils.getRelativeTimeSpanString(data.getModifiedDate()));
+        if(data.getParentId() == -4){
+            mTime.setText(DateUtils.getRelativeTimeSpanString(data.getmDeleteDate())+"删除");
+        }else {
+            mTime.setText(DateUtils.getRelativeTimeSpanString(data.getModifiedDate()));
+        }
+
 
         setBackground(data);
     }

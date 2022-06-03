@@ -52,6 +52,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
             NoteColumns.HAS_ATTACHMENT + " INTEGER NOT NULL DEFAULT 0," +
             NoteColumns.MODIFIED_DATE + " INTEGER NOT NULL DEFAULT (strftime('%s','now') * 1000)," +
             NoteColumns.DELETE_DATE + " INTEGER NOT NULL DEFAULT 0," +
+            NoteColumns.IS_DELETE + " INTEGER NOT NULL DEFAULT 0," +
             NoteColumns.NOTES_COUNT + " INTEGER NOT NULL DEFAULT 0," +
             NoteColumns.SNIPPET + " TEXT NOT NULL DEFAULT ''," +
             NoteColumns.TYPE + " INTEGER NOT NULL DEFAULT 0," +
@@ -61,7 +62,8 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
             NoteColumns.LOCAL_MODIFIED + " INTEGER NOT NULL DEFAULT 0," +
             NoteColumns.ORIGIN_PARENT_ID + " INTEGER NOT NULL DEFAULT 0," +
             NoteColumns.GTASK_ID + " TEXT NOT NULL DEFAULT ''," +
-            NoteColumns.VERSION + " INTEGER NOT NULL DEFAULT 0" +
+            NoteColumns.VERSION + " INTEGER NOT NULL DEFAULT 0," +
+            NoteColumns.IS_STAR + " INTEGER NOT NULL DEFAULT 0" +
         ")";
 
     private static final String CREATE_DATA_TABLE_SQL =
@@ -103,7 +105,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         " AFTER UPDATE OF " + NoteColumns.PARENT_ID + " ON " + TABLE.NOTE +
         " BEGIN " +
         "  UPDATE " + TABLE.NOTE +
-        "   SET " + NoteColumns.NOTES_COUNT + "=" + NoteColumns.NOTES_COUNT + "-1" + "," + NoteColumns.DELETE_DATE + "=" +"(strftime('%s','now') * 1000)"+
+        "   SET " + NoteColumns.NOTES_COUNT + "=" + NoteColumns.NOTES_COUNT + "-1" +
         "  WHERE " + NoteColumns.ID + "=old." + NoteColumns.PARENT_ID +
         "  AND " + NoteColumns.NOTES_COUNT + ">0" + ";" +
         " END";
@@ -207,6 +209,18 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         "  WHERE " + NoteColumns.PARENT_ID + "=old." + NoteColumns.ID + ";" +
         " END";
 
+    /**
+     * 修改删除时间
+     */
+    private static final String NOTE_CHANGE_DELETE_DATE_ON_UPDATE_TRIGGER =
+            "CREATE TRIGGER CHANGE_DELETE_DATE_ON_UPDATE_TRIGGER " +
+                " AFTER UPDATE OF " + NoteColumns.PARENT_ID + " ON " + TABLE.NOTE +
+                " BEGIN " +
+                "  UPDATE " + TABLE.NOTE +
+                "   SET " + NoteColumns.DELETE_DATE + "=" +"(strftime('%s','now') * 1000)"+","+NoteColumns.IS_DELETE+ "="+ 1 +
+                "  WHERE " + NoteColumns.PARENT_ID +"=-4"+ " and " + NoteColumns.IS_DELETE+ "=0" +";" +
+                " END";
+
     public NotesDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -234,6 +248,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(NOTE_INCREASE_FOLDER_COUNT_ON_INSERT_TRIGGER);
         db.execSQL(FOLDER_DELETE_NOTES_ON_DELETE_TRIGGER);
         db.execSQL(FOLDER_MOVE_NOTES_ON_TRASH_TRIGGER);
+        db.execSQL(NOTE_CHANGE_DELETE_DATE_ON_UPDATE_TRIGGER);
     }
 
     private void createSystemFolder(SQLiteDatabase db) {

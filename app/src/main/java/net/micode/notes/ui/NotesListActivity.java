@@ -568,7 +568,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 DataUtils.batchDeleteNotes(mContentResolver, ids);
             } else {
                 Toast.makeText(NotesListActivity.this, string.moveto_bin, Toast.LENGTH_LONG).show();
-                DataUtils.batchMoveToFolder(mContentResolver, ids, Notes.ID_TRASH_FOLER);
+                DataUtils.batchMoveToFolder(mContentResolver, ids, Notes.ID_RECYCLE_BIN);
             }
         } else {
             // in sync mode, we'll move the deleted folder into the trash folder

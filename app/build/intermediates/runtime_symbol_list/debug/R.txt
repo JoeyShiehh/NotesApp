@@ -628,7 +628,8 @@ int drawable shape_left_bottom_normal 0x7f0700ad
 int drawable shape_right_bottom 0x7f0700ae
 int drawable shape_right_bottom_normal 0x7f0700af
 int drawable shape_top 0x7f0700b0
-int drawable sorticon 0x7f0700c2
+int drawable sort 0x7f0700c3
+int drawable star 0x7f0700c4
 int drawable title_alert 0x7f0700b1
 int drawable title_background 0x7f0700b2
 int drawable title_bar_bg 0x7f0700b3
@@ -671,6 +672,7 @@ int id action_text 0x7f080015
 int id actions 0x7f080016
 int id activity_chooser_view_content 0x7f080017
 int id add 0x7f080018
+int id add_star 0x7f0800ca
 int id alertTitle 0x7f080019
 int id always 0x7f08001a
 int id amPm 0x7f08001b

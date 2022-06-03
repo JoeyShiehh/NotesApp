@@ -18,7 +18,9 @@ package net.micode.notes.ui;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.nfc.Tag;
 import android.text.TextUtils;
+import android.util.Log;
 
 import net.micode.notes.data.Contact;
 import net.micode.notes.data.Notes;
@@ -27,6 +29,7 @@ import net.micode.notes.tool.DataUtils;
 
 
 public class NoteItemData {
+    private static final String TAG = "NoteItemData";
     static final String [] PROJECTION = new String [] {
         NoteColumns.ID,
         NoteColumns.ALERTED_DATE,
@@ -34,12 +37,14 @@ public class NoteItemData {
         NoteColumns.CREATED_DATE,
         NoteColumns.HAS_ATTACHMENT,
         NoteColumns.MODIFIED_DATE,
+        NoteColumns.DELETE_DATE,
+        NoteColumns.IS_DELETE,
         NoteColumns.NOTES_COUNT,
         NoteColumns.PARENT_ID,
         NoteColumns.SNIPPET,
         NoteColumns.TYPE,
         NoteColumns.WIDGET_ID,
-        NoteColumns.WIDGET_TYPE,
+        NoteColumns.WIDGET_TYPE
     };
 
     private static final int ID_COLUMN                    = 0;
@@ -48,12 +53,16 @@ public class NoteItemData {
     private static final int CREATED_DATE_COLUMN          = 3;
     private static final int HAS_ATTACHMENT_COLUMN        = 4;
     private static final int MODIFIED_DATE_COLUMN         = 5;
-    private static final int NOTES_COUNT_COLUMN           = 6;
-    private static final int PARENT_ID_COLUMN             = 7;
-    private static final int SNIPPET_COLUMN               = 8;
-    private static final int TYPE_COLUMN                  = 9;
-    private static final int WIDGET_ID_COLUMN             = 10;
-    private static final int WIDGET_TYPE_COLUMN           = 11;
+    private static final int DELETE_DATE_COLUMN           = 6;
+    private static final int IS_DELETE_COLUMN             = 7;
+    private static final int NOTES_COUNT_COLUMN           = 8;
+    private static final int PARENT_ID_COLUMN             = 9;
+    private static final int SNIPPET_COLUMN               = 10;
+    private static final int TYPE_COLUMN                  = 11;
+    private static final int WIDGET_ID_COLUMN             = 12;
+    private static final int WIDGET_TYPE_COLUMN           = 13;
+    private static final int IS_STAR_COLUMN               = 14;
+
 
     private long mId;
     private long mAlertDate;
@@ -69,6 +78,9 @@ public class NoteItemData {
     private int mWidgetType;
     private String mName;
     private String mPhoneNumber;
+    private int mIsDelete;
+    private long mDeleteDate;
+    private int mIsStar;
 
     private boolean mIsLastItem;
     private boolean mIsFirstItem;
@@ -83,14 +95,25 @@ public class NoteItemData {
         mCreatedDate = cursor.getLong(CREATED_DATE_COLUMN);
         mHasAttachment = (cursor.getInt(HAS_ATTACHMENT_COLUMN) > 0) ? true : false;
         mModifiedDate = cursor.getLong(MODIFIED_DATE_COLUMN);
+        Log.d(TAG,"mModifiedDate: "+mModifiedDate);
+        mIsDelete = cursor.getInt(IS_DELETE_COLUMN);
+//        for (int i = 0;i<14;i++){
+//            mDeleteDate = cursor.getLong(i);
+//            Log.d(TAG,"mDeleteDate: "+mDeleteDate+"; i=" +i);
+//        }
+        mDeleteDate = cursor.getLong(DELETE_DATE_COLUMN);
+        Log.d(TAG,"mIsDelete: "+mIsDelete);
+        Log.d(TAG,"mDeleteDate: "+mDeleteDate);
         mNotesCount = cursor.getInt(NOTES_COUNT_COLUMN);
         mParentId = cursor.getLong(PARENT_ID_COLUMN);
         mSnippet = cursor.getString(SNIPPET_COLUMN);
+//        Log.d(TAG,"mSnippet: "+mSnippet);
         mSnippet = mSnippet.replace(NoteEditActivity.TAG_CHECKED, "").replace(
                 NoteEditActivity.TAG_UNCHECKED, "");
         mType = cursor.getInt(TYPE_COLUMN);
         mWidgetId = cursor.getInt(WIDGET_ID_COLUMN);
         mWidgetType = cursor.getInt(WIDGET_TYPE_COLUMN);
+        mIsStar = cursor.getInt(IS_STAR_COLUMN);
 
         mPhoneNumber = "";
         if (mParentId == Notes.ID_CALL_RECORD_FOLDER) {
@@ -133,6 +156,7 @@ public class NoteItemData {
             }
         }
     }
+
 
     public boolean isOneFollowingFolder() {
         return mIsOneNoteFollowingFolder;
@@ -220,5 +244,17 @@ public class NoteItemData {
 
     public static int getNoteType(Cursor cursor) {
         return cursor.getInt(TYPE_COLUMN);
+    }
+
+    public int getmIsDelete() {
+        return mIsDelete;
+    }
+
+    public long getmDeleteDate() {
+        return mDeleteDate;
+    }
+
+    public int getmIsStar() {
+        return mIsStar;
     }
 }
