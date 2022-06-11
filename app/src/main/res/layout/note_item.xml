@@ -20,6 +20,11 @@
     android:id="@+id/note_item"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <ImageView
+        android:id="@+id/iv_alert_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -70,9 +75,5 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_alert_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"/>
+
 </FrameLayout>

@@ -126,5 +126,10 @@
     <string name="press_back_twice">再按一次退出程序</string>
     <string name="main_title">便签</string>
     <string name="about_us">关于我们</string>
+    <string name="recover">恢复</string>
+    <string name="moveto_bin">已移入回收站</string>
+    <string name="deep_delete">已删除，该操作不可恢复</string>
+    <string name="successful_recovery">成功恢复</string>
+    <string name="sortway">"排序方式 "</string>
 
 </resources>

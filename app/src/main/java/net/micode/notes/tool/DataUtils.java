@@ -29,6 +29,7 @@ import android.util.Log;
 import net.micode.notes.data.Notes;
 import net.micode.notes.data.Notes.CallNote;
 import net.micode.notes.data.Notes.NoteColumns;
+import net.micode.notes.ui.NoteItemData;
 import net.micode.notes.ui.NotesListAdapter.AppWidgetAttribute;
 
 import java.util.ArrayList;
@@ -100,6 +101,44 @@ public class DataUtils {
             ContentProviderResult[] results = resolver.applyBatch(Notes.AUTHORITY, operationList);
             if (results == null || results.length == 0 || results[0] == null) {
                 Log.d(TAG, "delete notes failed, ids:" + ids.toString());
+                return false;
+            }
+            return true;
+        } catch (RemoteException e) {
+            Log.e(TAG, String.format("%s: %s", e.toString(), e.getMessage()));
+        } catch (OperationApplicationException e) {
+            Log.e(TAG, String.format("%s: %s", e.toString(), e.getMessage()));
+        }
+        return false;
+    }
+
+    /**
+     * 批量添加星标
+     */
+    public static boolean batchAddStar(ContentResolver resolver, HashSet<Long> ids) {
+        if (ids == null) {
+            Log.d(TAG, "the ids is null");
+            return true;
+        }
+
+        ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
+        ContentResolver mResolver=resolver;
+
+        for (long id : ids) {
+            Cursor cursor = resolver.query(ContentUris.withAppendedId(Notes.CONTENT_NOTE_URI, id), new String[]{NoteColumns.IS_STAR},null,null,null);
+            cursor.moveToFirst();
+            int isStar = cursor.getInt(0);
+            Log.d(TAG, "isStar: " + isStar);
+            ContentProviderOperation.Builder builder = ContentProviderOperation
+                    .newUpdate(ContentUris.withAppendedId(Notes.CONTENT_NOTE_URI, id));
+            builder.withValue(NoteColumns.IS_STAR, 1^isStar);
+            operationList.add(builder.build());
+        }
+
+        try {
+            ContentProviderResult[] results = resolver.applyBatch(Notes.AUTHORITY, operationList);
+            if (results == null || results.length == 0 || results[0] == null) {
+                Log.d(TAG, "add star failed, ids:" + ids.toString());
                 return false;
             }
             return true;

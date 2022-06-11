@@ -24,6 +24,12 @@
         android:showAsAction="always|withText" />
 
     <item
+        android:id="@+id/addStar"
+        android:title="添加星标"
+        android:icon="@drawable/star"
+        android:showAsAction="always|withText" />
+
+    <item
         android:id="@+id/delete"
         android:title="@string/menu_delete"
         android:icon="@drawable/menu_delete"

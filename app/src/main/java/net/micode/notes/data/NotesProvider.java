@@ -88,16 +88,19 @@ public class NotesProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
             String sortOrder) {
+        Log.d(TAG,"db query");
         Cursor c = null;
         SQLiteDatabase db = mHelper.getReadableDatabase();
         String id = null;
         switch (mMatcher.match(uri)) {
             case URI_NOTE:
+                Log.d(TAG,"db query URI_NOTE");
                 c = db.query(TABLE.NOTE, projection, selection, selectionArgs, null, null,
                         sortOrder);
                 break;
             case URI_NOTE_ITEM:
                 id = uri.getPathSegments().get(1);
+                Log.d(TAG,"db query URI_NOTE_ITEM");
                 c = db.query(TABLE.NOTE, projection, NoteColumns.ID + "=" + id
                         + parseSelection(selection), selectionArgs, null, null, sortOrder);
                 break;
@@ -149,6 +152,7 @@ public class NotesProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
+        Log.d(TAG,"db insert");
         SQLiteDatabase db = mHelper.getWritableDatabase();
         long dataId = 0, noteId = 0, insertedId = 0;
         switch (mMatcher.match(uri)) {
@@ -183,6 +187,7 @@ public class NotesProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
+        Log.d(TAG,"db delete");
         int count = 0;
         String id = null;
         SQLiteDatabase db = mHelper.getWritableDatabase();
@@ -229,6 +234,7 @@ public class NotesProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        Log.d(TAG,"db update");
         int count = 0;
         String id = null;
         SQLiteDatabase db = mHelper.getWritableDatabase();

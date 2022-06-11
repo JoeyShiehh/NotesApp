@@ -538,6 +538,7 @@ drawable abc_vector_test
 drawable about
 drawable bg_btn_set_color
 drawable bg_color_btn_mask
+drawable bin
 drawable btn_create
 drawable btn_create_medium
 drawable btn_create_normal
@@ -609,6 +610,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable restore
 drawable search_result
 drawable sel_btn
 drawable sel_btn_help
@@ -627,6 +629,9 @@ drawable shape_left_bottom_normal
 drawable shape_right_bottom
 drawable shape_right_bottom_normal
 drawable shape_top
+drawable sort
+drawable star
+drawable star_tag
 drawable title_alert
 drawable title_background
 drawable title_bar_bg
@@ -669,6 +674,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id addStar
 id alertTitle
 id always
 id amPm
@@ -764,6 +770,7 @@ id navigation_bar
 id never
 id none
 id normal
+id normally
 id note_bg_color_selector
 id note_edit_list
 id note_edit_view
@@ -780,6 +787,7 @@ id preference_sync_button
 id progress_circular
 id progress_horizontal
 id radio
+id restore
 id right_icon
 id right_side
 id screen
@@ -802,6 +810,7 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id sort
 id spacer
 id split_action_bar
 id src_atop
@@ -841,6 +850,7 @@ id useLogo
 id widget_bg_image
 id widget_text
 id withText
+id with_star
 id wrap_content
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
@@ -917,6 +927,7 @@ menu note_edit
 menu note_list
 menu note_list_dropdown
 menu note_list_options
+menu note_list_options_recycle_bin
 menu sub_folder
 mipmap ic_help
 mipmap ic_info
@@ -968,6 +979,7 @@ string button_delete
 string call_record_folder_name
 string datetime_dialog_cancel
 string datetime_dialog_ok
+string deep_delete
 string delete_remind_time_message
 string error_note_empty_for_clock
 string error_note_empty_for_send_to_desktop
@@ -1017,6 +1029,7 @@ string menu_share
 string menu_sync
 string menu_sync_cancel
 string menu_title_select_folder
+string moveto_bin
 string note_alert_expired
 string note_link_email
 string note_link_other
@@ -1045,6 +1058,7 @@ string preferences_title
 string preferences_toast_cannot_change_account
 string preferences_toast_success_set_accout
 string press_back_twice
+string recover
 string recycle_bin
 string search
 string search_hint
@@ -1052,9 +1066,11 @@ string search_label
 string search_menu_title
 string search_setting_description
 string set_remind_time_message
+string sortway
 string status_bar_notification_info_overflow
 string success_sdcard_export
 string success_sync_account
+string successful_recovery
 string sync_progress_init_list
 string sync_progress_login
 string sync_progress_syncing

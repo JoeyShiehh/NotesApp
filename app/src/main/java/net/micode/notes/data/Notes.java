@@ -87,6 +87,12 @@ public class Notes {
          */
         public static final String MODIFIED_DATE = "modified_date";
 
+        /**
+         * 删除便签的时间
+         * <P> Type: INTEGER (long)</P>
+         */
+        public static final String DELETE_DATE = "delete_date";
+
 
         /**
          * Alert date
@@ -166,6 +172,16 @@ public class Notes {
          * <P> Type : INTEGER (long) </P>
          */
         public static final String VERSION = "version";
+
+        /**
+         * 是否删除
+         */
+        public static final String IS_DELETE = "is_delete";
+
+        /**
+         * 是否星标
+         */
+        public static final String IS_STAR = "is_star";
     }
 
     public interface DataColumns {

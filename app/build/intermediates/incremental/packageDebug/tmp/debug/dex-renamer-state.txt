@@ -1,4 +1,25 @@
-#Sun May 01 12:57:38 CST 2022
-base.0=E\:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-renamed.0=classes.dex
+#Sun Jun 12 00:37:24 CST 2022
+path.4=13/classes.dex
+path.3=12/classes.dex
+path.2=11/classes.dex
+path.1=0/classes.dex
+path.7=5/classes.dex
+path.6=4/classes.dex
+path.5=15/classes.dex
 path.0=classes.dex
+base.4=E\:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\13\\classes.dex
+base.3=E\:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\12\\classes.dex
+base.2=E\:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
+base.1=E\:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.0=E\:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+renamed.7=classes8.dex
+renamed.6=classes7.dex
+base.7=E\:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+renamed.5=classes6.dex
+base.6=E\:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
+renamed.4=classes5.dex
+base.5=E\:\\.code_project\\Android_Studio\\MiNote\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex

@@ -24,6 +24,24 @@
         android:orderInCategory="0"
         android:showAsAction="always"
         tools:ignore="AppCompatResource"/>
+    <item
+        android:id="@+id/sort"
+        android:title="@string/sortway"
+        android:icon="@drawable/sort"
+        android:orderInCategory="0"
+        android:showAsAction="always"
+        tools:ignore="AppCompatResource">
+        <menu>
+            <item
+                android:id="@+id/normally"
+                android:title="创建日期排序"/>
+
+            <item
+                android:id="@+id/with_star"
+                android:title="星标排序"/>
+
+        </menu>
+    </item>
 
 
 </menu>
