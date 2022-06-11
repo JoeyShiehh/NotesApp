@@ -72,7 +72,7 @@
     </style>
 
     <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">#406694</item>
+        <item name="android:background">#22577a</item>
         <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>
         <item name="android:icon">@drawable/icon_app</item>
     </style>

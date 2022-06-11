@@ -44,7 +44,8 @@ public class NoteItemData {
         NoteColumns.SNIPPET,
         NoteColumns.TYPE,
         NoteColumns.WIDGET_ID,
-        NoteColumns.WIDGET_TYPE
+        NoteColumns.WIDGET_TYPE,
+        NoteColumns.IS_STAR
     };
 
     private static final int ID_COLUMN                    = 0;
@@ -97,13 +98,9 @@ public class NoteItemData {
         mModifiedDate = cursor.getLong(MODIFIED_DATE_COLUMN);
         Log.d(TAG,"mModifiedDate: "+mModifiedDate);
         mIsDelete = cursor.getInt(IS_DELETE_COLUMN);
-//        for (int i = 0;i<14;i++){
-//            mDeleteDate = cursor.getLong(i);
-//            Log.d(TAG,"mDeleteDate: "+mDeleteDate+"; i=" +i);
-//        }
         mDeleteDate = cursor.getLong(DELETE_DATE_COLUMN);
-        Log.d(TAG,"mIsDelete: "+mIsDelete);
-        Log.d(TAG,"mDeleteDate: "+mDeleteDate);
+//        Log.d(TAG,"mIsDelete: "+mIsDelete);
+//        Log.d(TAG,"mDeleteDate: "+mDeleteDate);
         mNotesCount = cursor.getInt(NOTES_COUNT_COLUMN);
         mParentId = cursor.getLong(PARENT_ID_COLUMN);
         mSnippet = cursor.getString(SNIPPET_COLUMN);
@@ -114,6 +111,7 @@ public class NoteItemData {
         mWidgetId = cursor.getInt(WIDGET_ID_COLUMN);
         mWidgetType = cursor.getInt(WIDGET_TYPE_COLUMN);
         mIsStar = cursor.getInt(IS_STAR_COLUMN);
+        Log.d(TAG,"mIsStar: "+mIsStar);
 
         mPhoneNumber = "";
         if (mParentId == Notes.ID_CALL_RECORD_FOLDER) {

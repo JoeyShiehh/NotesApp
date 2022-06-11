@@ -89,7 +89,10 @@ public class NotesListItem extends LinearLayout {
                 if (data.hasAlert()) {
                     mAlert.setImageResource(R.drawable.clock);
                     mAlert.setVisibility(View.VISIBLE);
-                } else {
+                } else if(data.getmIsStar()==1){
+                    mAlert.setImageResource(R.drawable.star_tag);
+                    mAlert.setVisibility(View.VISIBLE);
+                }else {
                     mAlert.setVisibility(View.GONE);
                 }
             }

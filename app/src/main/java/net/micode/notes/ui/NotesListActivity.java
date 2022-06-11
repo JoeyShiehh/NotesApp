@@ -101,11 +101,15 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     private enum ListEditState {
         NOTE_LIST, SUB_FOLDER, CALL_RECORD_FOLDER, RECYCLE_BIN
-    }
+    };
 
-    ;
+    private enum SortWay {
+        CREATE_TIME,STAR
+    };
 
     private ListEditState mState;
+
+    private SortWay mSortWay;
 
     private BackgroundQueryHandler mBackgroundQueryHandler;
 
@@ -147,7 +151,6 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     private long firstPressBackTime = 0;
 
-    private boolean isInRecycleBin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,6 +253,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         mOriginY = 0;
         mTitleBar = (TextView) findViewById(id.tv_title_bar);
         mState = ListEditState.NOTE_LIST;
+        mSortWay= SortWay.CREATE_TIME;
         mModeCallBack = new ModeCallback();
     }
 
@@ -259,18 +263,19 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         private MenuItem mMoveMenu;
 
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            if(!isInRecycleBin){
+            if (mState != ListEditState.RECYCLE_BIN) {
                 getMenuInflater().inflate(R.menu.note_list_options, menu);
                 mMoveMenu = menu.findItem(id.move);
-            }else {
+            } else {
                 getMenuInflater().inflate(R.menu.note_list_options_recycle_bin, menu);
                 mMoveMenu = menu.findItem(id.restore);
             }
             Log.d(TAG, "ModeCallback.onCreateActionMode");
             menu.findItem(id.delete).setOnMenuItemClickListener(this);
-            if (mFocusNoteDataItem.getParentId() == Notes.ID_CALL_RECORD_FOLDER
-                    || DataUtils.getUserFolderCount(mContentResolver) == 0) {
-                mMoveMenu.setVisible(true);
+            menu.findItem(id.addStar).setOnMenuItemClickListener(this);
+            if ((mFocusNoteDataItem.getParentId() == Notes.ID_CALL_RECORD_FOLDER
+                    || DataUtils.getUserFolderCount(mContentResolver) == 0) && mState != ListEditState.RECYCLE_BIN) {
+                mMoveMenu.setVisible(false);
             } else {
                 mMoveMenu.setVisible(true);
                 mMoveMenu.setOnMenuItemClickListener(this);
@@ -350,7 +355,14 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             }
 
             switch (item.getItemId()) {
+                case id.addStar:
+                    Log.d(TAG, "onMenuItemClick: id.add_star");
+                    DataUtils.batchAddStar(mContentResolver, mNotesListAdapter.getSelectedItemIds());
+                    Toast.makeText(NotesListActivity.this, "已设置/取消星标",Toast.LENGTH_LONG).show();
+                    startAsyncNotesListQuery();
+                    break;
                 case id.delete:
+                    Log.d(TAG, "onMenuItemClick: id.delete");
                     AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
                     builder.setTitle(getString(string.alert_title_delete));
                     builder.setIcon(android.R.drawable.ic_dialog_alert);
@@ -361,10 +373,10 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
                                     batchDelete();
-                                    if(!isInRecycleBin){
-                                        Toast.makeText(NotesListActivity.this, string.moveto_bin,Toast.LENGTH_LONG).show();
-                                    }else {
-                                        Toast.makeText(NotesListActivity.this, string.deep_delete,Toast.LENGTH_LONG).show();
+                                    if (mState != ListEditState.RECYCLE_BIN) {
+                                        Toast.makeText(NotesListActivity.this, string.moveto_bin, Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(NotesListActivity.this, string.deep_delete, Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -372,11 +384,14 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                     builder.show();
                     break;
                 case id.move:
+                    Log.d(TAG, "onMenuItemClick: id.move");
                     startQueryDestinationFolders();
                     break;
                 case id.restore:
-                    DataUtils.batchMoveToFolder(mContentResolver, mNotesListAdapter.getSelectedItemIds(), Notes.ID_ROOT_FOLDER);
-                    Toast.makeText(NotesListActivity.this, string.successful_recovery,Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "onMenuItemClick: id.restore");
+//                    DataUtils.batchMoveToFolder(mContentResolver, mNotesListAdapter.getSelectedItemIds(), Notes.ID_ROOT_FOLDER);
+                    Toast.makeText(NotesListActivity.this, string.successful_recovery, Toast.LENGTH_LONG).show();
+                    break;
                 default:
                     return false;
             }
@@ -451,10 +466,18 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     private void startAsyncNotesListQuery() {
         String selection = (mCurrentFolderId == Notes.ID_ROOT_FOLDER) ? ROOT_FOLDER_SELECTION
                 : NORMAL_SELECTION;
+        if(mSortWay == SortWay.CREATE_TIME){
         mBackgroundQueryHandler.startQuery(FOLDER_NOTE_LIST_QUERY_TOKEN, null,
                 Notes.CONTENT_NOTE_URI, NoteItemData.PROJECTION, selection, new String[]{
                         String.valueOf(mCurrentFolderId)
                 }, NoteColumns.TYPE + " DESC," + NoteColumns.MODIFIED_DATE + " DESC");
+        }else {
+            mBackgroundQueryHandler.startQuery(FOLDER_NOTE_LIST_QUERY_TOKEN, null,
+                    Notes.CONTENT_NOTE_URI, NoteItemData.PROJECTION, selection, new String[]{
+                            String.valueOf(mCurrentFolderId)
+                    }, NoteColumns.TYPE + " DESC," + NoteColumns.IS_STAR + " DESC,"+NoteColumns.MODIFIED_DATE + " DESC");
+        }
+
     }
 
     private final class BackgroundQueryHandler extends AsyncQueryHandler {
@@ -515,10 +538,10 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 HashSet<AppWidgetAttribute> widgets = mNotesListAdapter.getSelectedWidget();
                 if (!isSyncMode()) {
                     // if not synced, delete notes directly
-                    if (isInRecycleBin && DataUtils.batchDeleteNotes(mContentResolver, mNotesListAdapter
+                    if (mState == ListEditState.RECYCLE_BIN && DataUtils.batchDeleteNotes(mContentResolver, mNotesListAdapter
                             .getSelectedItemIds())) {
                     }
-                    if (!isInRecycleBin && DataUtils.batchMoveToFolder(mContentResolver, mNotesListAdapter
+                    if (mState != ListEditState.RECYCLE_BIN && DataUtils.batchMoveToFolder(mContentResolver, mNotesListAdapter
                             .getSelectedItemIds(), Notes.ID_RECYCLE_BIN)) {
                         Log.d(TAG, "batchMoveToFolder:Notes.ID_RECYCLE_BIN");
                     } else {
@@ -563,7 +586,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         if (!isSyncMode()) {
             // if not synced, delete folder directly
 //            DataUtils.batchDeleteNotes(mContentResolver, ids);
-            if (isInRecycleBin) {
+            if (mState == ListEditState.RECYCLE_BIN) {
                 Toast.makeText(NotesListActivity.this, string.deep_delete, Toast.LENGTH_LONG).show();
                 DataUtils.batchDeleteNotes(mContentResolver, ids);
             } else {
@@ -610,7 +633,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             mTitleBar.setText(data.getSnippet());
         }
         mTitleBar.setVisibility(View.VISIBLE);
-        if(!isInRecycleBin) {
+        if (mState != ListEditState.RECYCLE_BIN) {
             mAddNewNote.setVisibility(View.VISIBLE);
         }
     }
@@ -727,7 +750,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         Log.e(TAG, "onBackPressed");
         switch (mState) {
             case SUB_FOLDER:
-                if (!isInRecycleBin) {
+                if (mState != ListEditState.RECYCLE_BIN) {
                     mCurrentFolderId = Notes.ID_ROOT_FOLDER;
                     mState = ListEditState.NOTE_LIST;
                 } else {
@@ -747,7 +770,6 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 ActionBar actionBar = getActionBar();
                 actionBar.setTitle(string.app_name);
                 actionBar.setIcon(drawable.icon_app);
-                isInRecycleBin = false;
                 mAddNewNote.setVisibility(View.VISIBLE);
                 break;
             case CALL_RECORD_FOLDER:
@@ -861,7 +883,6 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         } else if (mState == ListEditState.CALL_RECORD_FOLDER) {
             getMenuInflater().inflate(R.menu.call_record_folder, menu);
         } else if (mState == ListEditState.RECYCLE_BIN) {
-            //此处需要设计回收站的menu,定义为recycle_menu
             getMenuInflater().inflate(R.menu.sub_folder, menu);
         } else {
             Log.e(TAG, "Wrong state:" + mState);
@@ -920,13 +941,20 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
             case id.bin:
                 mCurrentFolderId = Notes.ID_RECYCLE_BIN;
                 mState = ListEditState.RECYCLE_BIN;
-                isInRecycleBin = true;
                 ActionBar actionBar = getActionBar();
-                actionBar.setTitle("回收站");
+                actionBar.setTitle("回收站（30日自动删除）");
                 actionBar.setIcon(drawable.bin);
                 startAsyncNotesListQuery();
                 mAddNewNote.setVisibility(View.GONE);
                 invalidateOptionsMenu();
+                break;
+            case id.normally:
+                mSortWay = SortWay.CREATE_TIME;
+                startAsyncNotesListQuery();
+                break;
+            case id.with_star:
+                mSortWay=SortWay.STAR;
+                startAsyncNotesListQuery();
                 break;
             default:
                 break;
@@ -1021,12 +1049,12 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                         break;
                     case SUB_FOLDER:
                     case CALL_RECORD_FOLDER:
-                        if (!isInRecycleBin && item.getType() == Notes.TYPE_NOTE) {
+                        if (mState != ListEditState.RECYCLE_BIN && item.getType() == Notes.TYPE_NOTE) {
 //                            getMenuInflater().inflate(R.menu.sub_folder);
                             openNode(item);
-                        } else if(isInRecycleBin){
-                            Toast.makeText(NotesListActivity.this,"回收站无法编辑，请恢复后编辑",Toast.LENGTH_SHORT).show();
-                        } else{
+                        } else if (mState == ListEditState.RECYCLE_BIN) {
+                            Toast.makeText(NotesListActivity.this, "回收站无法编辑，请恢复后编辑", Toast.LENGTH_SHORT).show();
+                        } else {
                             Log.e(TAG, "Wrong note type in SUB_FOLDER");
                         }
                         break;
@@ -1035,7 +1063,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                             invalidateOptionsMenu();
                             openFolder(item);
                         } else if (item.getType() == Notes.TYPE_NOTE) {
-                            Toast.makeText(NotesListActivity.this,"回收站无法编辑，请恢复后编辑",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NotesListActivity.this, "回收站无法编辑，请恢复后编辑", Toast.LENGTH_SHORT).show();
                         } else {
                             Log.e(TAG, "Wrong note type in NOTE_LIST");
                         }

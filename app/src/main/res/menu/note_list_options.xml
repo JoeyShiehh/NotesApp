@@ -24,7 +24,7 @@
         android:showAsAction="always|withText" />
 
     <item
-        android:id="@+id/add_star"
+        android:id="@+id/addStar"
         android:title="添加星标"
         android:icon="@drawable/star"
         android:showAsAction="always|withText" />

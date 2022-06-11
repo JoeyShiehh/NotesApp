@@ -631,6 +631,7 @@ drawable shape_right_bottom_normal
 drawable shape_top
 drawable sort
 drawable star
+drawable star_tag
 drawable title_alert
 drawable title_background
 drawable title_bar_bg
@@ -673,7 +674,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
-id add_star
+id addStar
 id alertTitle
 id always
 id amPm
